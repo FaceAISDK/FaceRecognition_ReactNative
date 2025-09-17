@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">滚动字幕</string>
+    <string name="confirm">确 定</string>
+    <string name="input_text_hint">请输入你要滚动的文字</string>
+    <string name="select">请选择</string>
+    <string name="text_speed_tag">滚动速度:</string>
+    <string name="text_size_tag">文字大小:</string>
+    <string name="text_color_tag">文字颜色:</string>
+    <string name="text_bg_color_tag">背景颜色:</string>
+    <string name="text_content_tag">文字内容:</string>
+
+</resources>

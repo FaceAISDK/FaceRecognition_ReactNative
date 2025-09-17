@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:customAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+    <anylife.scrolltextview.ScrollTextView
+        android:id="@+id/scrollText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#33336699"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/close"
+        customAttr:clickEnable="false"
+        customAttr:isHorizontal="true"
+        customAttr:speed="4"
+        customAttr:text="请点击设置来指定相关属性"
+        customAttr:text_color="@android:color/white"
+        customAttr:text_size="24sp" />
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:padding="18dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_baseline_add_task_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/close">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="900dp"
+            android:padding="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/text_size_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_size_tag"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SeekBar
+                android:id="@+id/text_size_seek_bar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:max="200"
+                android:min="16"
+                app:layout_constraintBottom_toBottomOf="@id/text_size_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_size_tag"
+                app:layout_constraintTop_toTopOf="@id/text_size_tag" />
+
+
+            <TextView
+                android:id="@+id/text_speed_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_speed_tag"
+                android:layout_marginTop="22dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_size_tag" />
+
+            <SeekBar
+                android:id="@+id/text_speed_seek_bar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:max="14"
+                android:min="4"
+                app:layout_constraintBottom_toBottomOf="@id/text_speed_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_speed_tag"
+                app:layout_constraintTop_toTopOf="@id/text_speed_tag" />
+
+
+            <TextView
+                android:id="@+id/text_color_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/text_color_tag"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_speed_tag" />
+
+            <TextView
+                android:id="@+id/text_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:background="@color/ic_launcher_background"
+                android:gravity="center"
+                android:text="@string/select"
+                android:textSize="16sp"
+                android:padding="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/text_color_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_color_tag"
+                app:layout_constraintTop_toTopOf="@id/text_color_tag" />
+
+
+            <TextView
+                android:id="@+id/bg_color_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/text_bg_color_tag"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_color_tag" />
+
+            <TextView
+                android:id="@+id/bg_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:background="@color/ic_launcher_background"
+                android:gravity="center"
+                android:text="@string/select"
+                android:textSize="16sp"
+                android:padding="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/bg_color_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bg_color_tag"
+                app:layout_constraintTop_toTopOf="@id/bg_color_tag" />
+
+            <EditText
+                android:id="@+id/text_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                android:hint="@string/input_text_hint"
+                android:textSize="21sp"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:layout_constraintTop_toBottomOf="@id/bg_color_tag" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
