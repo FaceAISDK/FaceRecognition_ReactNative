@@ -57,7 +57,7 @@ You can use it in advisement player,TV news show or airport metro information pu
 - 2.Android系统信息：    手机品牌或特殊设备描述，Android系统版本号等信息
 
 .
-## Any questions,please contact me at: anylife.zlb@gmail.com
+## Any questions,please contact me at: FaceAISDK.Service@gmail.com
 
 视频看起来卡顿是录制调低了帧律以便快速上传和播放。
 
