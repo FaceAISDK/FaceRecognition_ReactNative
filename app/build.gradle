@@ -21,8 +21,6 @@ android {
         abortOnError false
     }
     namespace 'com.anylife.fragment.scrolltextview'
-
-
 }
 
 

@@ -1,7 +1,7 @@
 package com.anylife.fragment.scrolltextview;
 
 import android.content.Intent;
-import android.os.Build;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,10 +18,7 @@ public class LauncherActivity extends AppCompatActivity {
     public static final String SCROLL_SIZE_KEY = "scrollSize";
     public static final String SCROLL_SPEED_KEY = "scrollSpeed";
     public static final String TEXT_COLOR_KEY = "textColor";
-    public static final String TEXT_BG_COLOR_KEY = "textBgColor";
-
     public static final int REQUEST_SETTING_CODE = 0x0001;
-    
     private ScrollTextView scrollTextView;
 
 
@@ -32,22 +29,16 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         scrollTextView = findViewById(R.id.scrollText);
 
-        findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LauncherActivity.this, SettingActivity.class);
+        findViewById(R.id.setting).setOnClickListener(v -> {
+            Intent intent = new Intent(LauncherActivity.this, SettingActivity.class);
 
-                intent.putExtra(TEXT_INPUT_KEY, scrollTextView.getText());
-                intent.putExtra(SCROLL_SIZE_KEY, scrollTextView.getTextSize());
-                intent.putExtra(SCROLL_SPEED_KEY, scrollTextView.getSpeed());
-                intent.putExtra(TEXT_COLOR_KEY, scrollTextView.getTextColor());
-                intent.putExtra(TEXT_BG_COLOR_KEY, scrollTextView.getBackgroundColor());
+            intent.putExtra(TEXT_INPUT_KEY, scrollTextView.getText());
+            intent.putExtra(SCROLL_SIZE_KEY, scrollTextView.getTextSize());
+            intent.putExtra(SCROLL_SPEED_KEY, scrollTextView.getSpeed());
+            intent.putExtra(TEXT_COLOR_KEY, scrollTextView.getTextColor());
 
-                startActivityForResult(intent, REQUEST_SETTING_CODE);
-            }
+            startActivityForResult(intent, REQUEST_SETTING_CODE);
         });
-        
-
     }
 
 
@@ -56,17 +47,11 @@ public class LauncherActivity extends AppCompatActivity {
      * 隐藏虚拟按键，并且全屏
      */
     protected void hideBottomUIMenu() {
-        //隐藏虚拟按键，并且全屏
-        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
-            View v = this.getWindow().getDecorView();
-            v.setSystemUiVisibility(View.GONE);
-        } else if (Build.VERSION.SDK_INT >= 19) {
-            //for new api versions.
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
+        //for new api versions.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
 
@@ -75,9 +60,8 @@ public class LauncherActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString(TEXT_INPUT_KEY, scrollTextView.getText());
         outState.putFloat(SCROLL_SIZE_KEY, scrollTextView.getTextSize());
-        outState.putInt(SCROLL_SPEED_KEY, scrollTextView.getSpeed());
+        outState.putFloat(SCROLL_SPEED_KEY, scrollTextView.getSpeed());
         outState.putInt(TEXT_COLOR_KEY, scrollTextView.getTextColor());
-        outState.putInt(TEXT_BG_COLOR_KEY, scrollTextView.getBackgroundColor());
     }
 
     @Override
@@ -88,16 +72,15 @@ public class LauncherActivity extends AppCompatActivity {
         scrollTextView.setTextSize(savedInstanceState.getFloat(SCROLL_SIZE_KEY));
         scrollTextView.setSpeed(savedInstanceState.getInt(SCROLL_SPEED_KEY));
         scrollTextView.setTextColor(savedInstanceState.getInt(TEXT_COLOR_KEY));
-        scrollTextView.setBackgroundColor(savedInstanceState.getInt(TEXT_BG_COLOR_KEY));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        scrollTextView.setPauseScroll(false);  //防止设置了暂停影响演示
+//        scrollTextView.setPauseScroll(false);  //防止设置了暂停影响演示
 
-        if (requestCode == REQUEST_SETTING_CODE && resultCode == RESULT_OK) {
-            int scrollSpeed = data.getIntExtra(SCROLL_SPEED_KEY, 0);
+        if (requestCode == REQUEST_SETTING_CODE && resultCode == RESULT_OK &&data!=null) {
+            float scrollSpeed = data.getFloatExtra(SCROLL_SPEED_KEY, 0f);
             if (0 != scrollSpeed) {
                 scrollTextView.setSpeed(scrollSpeed);
             }
@@ -112,18 +95,11 @@ public class LauncherActivity extends AppCompatActivity {
                 scrollTextView.setTextColor(textColor);
             }
 
-            int textBgColor = data.getIntExtra(TEXT_BG_COLOR_KEY, 0);
-            if (0 != textColor) {
-                scrollTextView.setScrollTextBackgroundColor(textBgColor);
-            }
 
             if (!TextUtils.isEmpty(data.getStringExtra(TEXT_INPUT_KEY))) {
                 scrollTextView.setText(data.getStringExtra(TEXT_INPUT_KEY));
             }
         }
     }
-
-
-
 
 }

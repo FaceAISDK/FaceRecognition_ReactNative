@@ -8,7 +8,6 @@
         <attr name="text_color" format="color" />
         <attr name="text_size" format="dimension" />
         <attr name="times" format="integer" />
-
         <attr name="isScrollForever" format="boolean" />
 
     </declare-styleable>
