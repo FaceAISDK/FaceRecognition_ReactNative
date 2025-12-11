@@ -2,7 +2,7 @@
 
 Class ScrollTextView extends SurfaceView implements SurfaceHolder.Callback
 
-Android 滚动字幕，如新闻联播下面的，可以使用在广告机，滚动新闻信息，机场地铁等信息发布系统。
+支持Android横向纵向滚动字幕，如新闻联播下面的，可以使用在广告机，滚动新闻信息，机场地铁等信息发布系统。
 以前是在信息发布系统上使用过，作为动态布局的一部分，题外话，如果有想做像分众传媒或者类似的
 电梯广告的可以参考一下.
 
@@ -14,10 +14,10 @@ You can use it in advisement player,TV news show or airport metro information pu
 
 # How to use
 
-## Gradle 集成使用 (2.5.0 支持AndroidX，并且Target SDK=33)
+## Gradle 集成使用 (2.7.0 支持AndroidX，并且Target SDK=33)
 
 ```
- implementation 'io.github.anylifezlb:ScrollTextviewLib:2.5.0'
+ implementation 'io.github.anylifezlb:ScrollTextviewLib:2.7.0'
 ```
 
 ## 基础设置代码概要
@@ -57,7 +57,7 @@ You can use it in advisement player,TV news show or airport metro information pu
 - 2.Android系统信息：    手机品牌或特殊设备描述，Android系统版本号等信息
 
 .
-## Any questions,please contact me at: FaceAISDK.Service@gmail.com
+## Any questions,please contact me at: anylife.zlb@gmail.com
 
 视频看起来卡顿是录制调低了帧律以便快速上传和播放。
 
