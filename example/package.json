@@ -1,0 +1,24 @@
+{
+  "name": "face-sdk-example",
+  "private": true,
+  "version": "0.2.3",
+  "scripts": {
+    "ensure:deps": "bash ./ensure-js-deps.sh",
+    "prestart": "npm run ensure:deps",
+    "preandroid": "npm run ensure:deps",
+    "preios": "npm run ensure:deps",
+    "prepods:install": "npm run ensure:deps",
+    "start": "node ../node_modules/react-native/cli.js start --config metro.config.js",
+    "android": "node ../node_modules/react-native/cli.js run-android --no-packager",
+    "ios": "node ../node_modules/react-native/cli.js run-ios",
+    "pods:install": "./pod-install.sh",
+    "test": "node ../node_modules/jest/bin/jest.js --config jest.config.js --runInBand --passWithNoTests"
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-native": "0.84.0",
+    "@faceaisdk/react-native-face-sdk": "file:..",
+    "react-native-safe-area-context": "^5.5.2"
+  }
+}
+
