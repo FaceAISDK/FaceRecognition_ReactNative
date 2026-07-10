@@ -1,16 +1,16 @@
 {
   "name": "@faceaisdk/react-native-face-sdk",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "React Native offline face enrollment, verification, and liveness detection SDK.",
   "license": "FaceAISDK License",
   "author": "FaceAISDK.Service@gmail.com",
-  "homepage": "https://github.com/FaceAISDK/FaceAISDK_RN",
+  "homepage": "https://github.com/FaceAISDK/FaceRecognition_ReactNative",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FaceAISDK/FaceAISDK_RN.git"
+    "url": "git+https://github.com/FaceAISDK/FaceRecognition_ReactNative.git"
   },
   "bugs": {
-    "url": "https://github.com/FaceAISDK/FaceAISDK_RN/issues"
+    "url": "https://github.com/FaceAISDK/FaceRecognition_ReactNative/issues"
   },
   "source": "src/index.ts",
   "main": "lib/index.js",

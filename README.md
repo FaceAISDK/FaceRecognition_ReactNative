@@ -163,5 +163,5 @@ livenessVerify(options?: LivenessVerifyOptions) => Promise<FaceResult>
 ---
 
 ## Support & Feedback
-Issues: [GitHub Issues](https://github.com/FaceAISDK/FaceAISDK_RN/issues)  
+Issues: [GitHub Issues](https://github.com/FaceAISDK/FaceRecognition_ReactNative/issues)  
 Email: FaceAISDK.Service@gmail.com
