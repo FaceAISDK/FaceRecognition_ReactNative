@@ -1,0 +1,99 @@
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+
+# Ruby / Bundler
+.bundle/
+vendor/bundle/
+
+# React Native
+*.jsbundle
+*.map
+index.android.bundle
+index.ios.bundle
+.metro-health-check*
+
+# Android
+.gradle/
+build/
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+android/generated/
+android/app/src/debug/res/values/debug_settings.xml
+.cxx/
+*.keystore
+!android/app/debug.keystore
+*.apk
+*.aab
+*.dex
+*.hprof
+
+# iOS
+# Detailed rules are in ios/.gitignore
+ios/.xcode.env.local
+ios/build/
+ios/Pods/
+ios/DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+ios/FaceAISDK_RN.xcworkspace/xcuserdata/
+
+# Testing
+/coverage/
+.nyc_output/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.patch
+
+# Fastlane
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Miscellaneous
+lib/
+example/
+*.tgz
