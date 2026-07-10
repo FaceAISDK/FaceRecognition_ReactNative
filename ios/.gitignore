@@ -1,0 +1,37 @@
+# Xcode
+#
+# gitignore contributors: code-review-check on github
+
+## Build results
+build/
+DerivedData/
+
+## Others
+*.moved-aside
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata/
+
+## Xcode 8 and later
+*.xccheckout
+*.xcuserstate
+
+## Local environment
+.xcode.env.local
+
+## Pods
+# It is generally recommended to ignore Pods, but keep Podfile and Podfile.lock
+Pods/
+
+## Dependency Managers
+vendor/bundle/
+
+## Product artifacts
+*.ipa
+*.hmap
