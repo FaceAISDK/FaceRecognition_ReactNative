@@ -1,8 +1,4 @@
 # @faceaisdk/react-native-face-sdk
-# new here https://github.com/FaceAISDK/FaceRecognition_ReaceNative
-# new here https://github.com/FaceAISDK/FaceRecognition_ReaceNative
-
-
 
 [English](#english) | [中文](#中文)
 
@@ -91,9 +87,6 @@ livenessVerify(options?: LivenessVerifyOptions) => Promise<FaceResult>
 ---
 
 ## 中文
-# new here https://github.com/FaceAISDK/FaceRecognition_ReaceNative
-# new here https://github.com/FaceAISDK/FaceRecognition_ReaceNative
-
 
 FaceAISDK 人脸识别、活体检测 React Native 原生插件，支持 iOS 和 Android 双端；所有功能无需后台 API 服务即可离线运行。
 
