@@ -38,7 +38,8 @@ npm install @faceaisdk/react-native-face-sdk
 
 #### Android Configuration
 1. Ensure your project's `minSdkVersion` is at least **24**.
-2. Add the camera permission to your `AndroidManifest.xml`:
+2. Ensure your project's `compileSdkVersion` is at least **34**.
+3. Add the camera permission to your `AndroidManifest.xml`:
    ```xml
    <uses-permission android:name="android.permission.CAMERA" />
    ```
@@ -74,15 +75,17 @@ livenessVerify(options?: LivenessVerifyOptions) => Promise<FaceResult>
 
 ### Data Structures (`FaceResult`)
 
-| Property      | Type | Description |
-|:--------------| :--- | :--- |
-| `code`        | `number` | Status code |
-| `message`     | `string` | Message |
-| `faceID`      | `string` | User identifier |
-| `similarity`  | `number` | Similarity score |
-| `liveness`    | `number` | Liveness score |
-| `faceFeature` | `string` | 1024-bit face feature string |
-| `faceBase64`  | `string` | Base64 face image |
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `code` | `number` | Status code |
+| `message` | `string` | Message |
+| `faceID` | `string` | User identifier |
+| `similarity` | `number` | Similarity score |
+| `liveness` | `number` | Liveness score |
+| `faceFeature`| `string` | 1024-bit face feature string |
+| `faceBase64` | `string` | Base64 face image |
+
+Use `message` directly; there is no need to map or branch on `code` for user-facing text.
 
 ---
 
@@ -120,7 +123,8 @@ npm install @faceaisdk/react-native-face-sdk
 
 #### Android 配置
 1. 确保项目的 `minSdkVersion` 至少为 **24**。
-2. 在 `AndroidManifest.xml` 中声明相机权限：
+2. 确保项目的 `compileSdkVersion` 至少为 **34**。
+3. 在 `AndroidManifest.xml` 中声明相机权限：
    ```xml
    <uses-permission android:name="android.permission.CAMERA" />
    ```
@@ -144,15 +148,17 @@ livenessVerify(options?: LivenessVerifyOptions) => Promise<FaceResult>
 
 ### 统一返回结构 (`FaceResult`)
 
-| 属性            | 类型 | 说明 |
-|:--------------| :--- | :--- |
-| `code`        | `number` | 状态码 |
-| `mseeage`     | `string` | 提示文本 |
-| `faceID`      | `string` | 用户标识 |
-| `similarity`  | `number` | 比对相似度 |
-| `liveness`    | `number` | 活体检测分值 |
-| `faceFeature` | `string` | 人脸特征值 (1024位) |
-| `faceBase64`  | `string` | 人脸图片 Base64 字符串 |
+| 属性 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `code` | `number` | 状态码 |
+| `message` | `string` | 提示文本 |
+| `faceID` | `string` | 用户标识 |
+| `similarity` | `number` | 比对相似度 |
+| `liveness` | `number` | 活体检测分值 |
+| `faceFeature`| `string` | 人脸特征值 (1024位) |
+| `faceBase64` | `string` | 人脸图片 Base64 字符串 |
+
+直接使用 `message` 即可，无需再根据 `code` 做文案映射或分支处理。
 
 ---
 

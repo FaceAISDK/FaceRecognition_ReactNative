@@ -1,0 +1,34 @@
+# 忽略所有隐藏文件
+.*
+
+# 忽略示例项目
+example/
+
+# 忽略开发文档和脚本
+插件封装与npm发布指南.md
+auto_run.sh
+verify_run.sh
+
+# 忽略测试源码
+__tests__/
+
+# 忽略构建产物
+lib/
+*.tgz
+tsconfig*.json
+
+# 忽略 IDE 和系统文件
+.idea/
+.vscode/
+*.log
+.DS_Store
+
+# 忽略 iOS/Android 编译产物
+ios/build/
+ios/DerivedData/
+ios/Pods/
+android/build/
+android/.gradle/
+android/.kotlin/
+**/build/
+**/Pods/

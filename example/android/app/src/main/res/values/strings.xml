@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FaceRN</string>
+    <string name="face_permission_camera_title">相机权限</string>
+    <string name="face_permission_camera_message">人脸识别需要使用相机，请授权相机权限</string>
+</resources>

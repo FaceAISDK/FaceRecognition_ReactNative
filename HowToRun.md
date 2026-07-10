@@ -1,4 +1,4 @@
-# How to Run /  如何运行
+# How to Run / 如何运行
 
 [English](#english) | [中文](#中文)
 
@@ -16,7 +16,11 @@ npm start -- --reset-cache
 > ⚠️ **Note**: Must use a physical device. Emulators are not supported.
 
 1. **Connect Device**: Ensure USB debugging is enabled and the device is connected.
-2. **Launch App**:
+2. **Port Reverse**: Map the device port to your computer's Metro port.
+   ```bash
+   adb reverse tcp:8765 tcp:8765
+   ```
+3. **Launch App**:
    ```bash
    npm run android
    ```
@@ -26,10 +30,10 @@ npm start -- --reset-cache
 
 1. **Install Dependencies**:
    ```bash
-   cd ios && pod install && cd ..
+   npm run pods:install
    ```
 2. **Xcode Configuration**:
-   - Open `ios/FaceAISDK_RN.xcworkspace` in Xcode.
+   - Open `example/ios/FaceRN.xcworkspace` in Xcode.
    - Go to **Signing & Capabilities** and select your Development Team.
 3. **Launch App**:
    ```bash
@@ -43,8 +47,8 @@ If you encounter build errors, run these commands:
 cd android && ./gradlew clean && cd ..
 
 # Clean iOS
-rm -rf ios/build
-rm -rf ~/Library/Developer/Xcode/DerivedData/FaceAISDK_RN-*
+rm -rf example/ios/build example/.build/ios
+rm -rf ~/Library/Developer/Xcode/DerivedData/FaceRN-*
 
 # Restart everything
 killall -9 node
@@ -65,7 +69,11 @@ npm start -- --reset-cache
 > ⚠️ **注意**：必须使用真机，不支持模拟器。
 
 1. **连接设备**：确保已开启 USB 调试并连接电脑。
-2. **启动项目**：
+2. **端口反向代理**：将手机端口映射到电脑的 Metro 端口。
+   ```bash
+   adb reverse tcp:8765 tcp:8765
+   ```
+3. **启动项目**：
    ```bash
    npm run android
    ```
@@ -75,10 +83,10 @@ npm start -- --reset-cache
 
 1. **安装依赖**：
    ```bash
-   cd ios && pod install && cd ..
+   npm run pods:install
    ```
 2. **Xcode 配置**：
-   - 使用 Xcode 打开 `ios/FaceAISDK_RN.xcworkspace`。
+   - 使用 Xcode 打开 `example/ios/FaceRN.xcworkspace`。
    - 在 **Signing & Capabilities** 选项卡中配置您的开发团队（Team）。
 3. **启动项目**：
    ```bash
@@ -92,8 +100,8 @@ npm start -- --reset-cache
 cd android && ./gradlew clean && cd ..
 
 # 清理 iOS
-rm -rf ios/build
-rm -rf ~/Library/Developer/Xcode/DerivedData/FaceAISDK_RN-*
+rm -rf example/ios/build example/.build/ios
+rm -rf ~/Library/Developer/Xcode/DerivedData/FaceRN-*
 
 # 重置所有环境
 killall -9 node
