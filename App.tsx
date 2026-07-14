@@ -32,7 +32,7 @@ const DEMO_BASE64_IMAGE = 'demo_base64_image_string';
 
 const labels = {
   en: {
-    title: 'FaceAISDK RN Demo',
+    title: 'Face Recognition API',
     connected: 'Plugin Connected',
     disconnected: 'Plugin Disconnected',
     permissionError: 'Permission Error',
@@ -50,7 +50,7 @@ const labels = {
     remove: 'Delete Face Feature',
   },
   zh: {
-    title: 'FaceAISDK RN 示例',
+    title: '人脸识别API示范',
     connected: '插件已连接',
     disconnected: '插件未连接',
     permissionError: '权限错误',
