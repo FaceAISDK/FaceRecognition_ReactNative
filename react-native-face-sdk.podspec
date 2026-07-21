@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   }
 
   s.dependency 'React-Core'
-  s.dependency 'FaceAISDK_Core', '2026.07.09'
+  s.dependency 'FaceAISDK_Core', '2026.07.16.beta2'
 
   # FaceAISDK_Core 已传递依赖 TensorFlowLiteSwift 2.17.0，此处显式声明仅为锁定版本一致。
   # s.dependency 'TensorFlowLiteSwift', '2.17.0'
