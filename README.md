@@ -13,7 +13,7 @@ React Native offline face enrollment, verification, and liveness detection SDK. 
 ### Installation
 
 ```bash
-npm install @faceaisdk/react-native-face-sdk
+npm install @faceaisdk/react-native-face-sdk@latest
 ```
 
 #### iOS Configuration
@@ -107,7 +107,7 @@ FaceAISDK 人脸识别、活体检测 React Native 原生插件，支持 iOS 和
 ### 安装
 
 ```bash
-npm install @faceaisdk/react-native-face-sdk
+npm install @faceaisdk/react-native-face-sdk@latest
 ```
 
 #### iOS 配置
