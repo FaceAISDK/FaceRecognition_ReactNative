@@ -13,7 +13,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		268F4632F017C81CDEB297B9 /* libPods-FaceAISDK_RN.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC70A1214F6F941E86FC547 /* libPods-FaceAISDK_RN.a */; };
 		3CDBC37B3754678F9CCB3417 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
-		75A6A1587A0EBAD46D3E3302 /* libPods-FaceAISDK_RN-FaceAISDK_RNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F642C5B1B12C3C3F6B8000D8 /* libPods-FaceAISDK_RN-FaceAISDK_RNTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -39,13 +38,10 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FaceAISDK_RN/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = FaceAISDK_RN/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		725CB0924456CB21B99E2DC3 /* Pods-FaceAISDK_RN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceAISDK_RN.release.xcconfig"; path = "Target Support Files/Pods-FaceAISDK_RN/Pods-FaceAISDK_RN.release.xcconfig"; sourceTree = "<group>"; };
-		7B5A3FDCC2065FE057F01039 /* Pods-FaceAISDK_RN-FaceAISDK_RNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceAISDK_RN-FaceAISDK_RNTests.release.xcconfig"; path = "Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FaceAISDK_RN/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FC70A1214F6F941E86FC547 /* libPods-FaceAISDK_RN.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceAISDK_RN.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8C710959C33F219935506C4 /* Pods-FaceAISDK_RN-FaceAISDK_RNTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceAISDK_RN-FaceAISDK_RNTests.debug.xcconfig"; path = "Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F09DD468000C89AEB63B8221 /* Pods-FaceAISDK_RN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceAISDK_RN.debug.xcconfig"; path = "Target Support Files/Pods-FaceAISDK_RN/Pods-FaceAISDK_RN.debug.xcconfig"; sourceTree = "<group>"; };
-		F642C5B1B12C3C3F6B8000D8 /* libPods-FaceAISDK_RN-FaceAISDK_RNTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceAISDK_RN-FaceAISDK_RNTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +49,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75A6A1587A0EBAD46D3E3302 /* libPods-FaceAISDK_RN-FaceAISDK_RNTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +99,6 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				8FC70A1214F6F941E86FC547 /* libPods-FaceAISDK_RN.a */,
-				F642C5B1B12C3C3F6B8000D8 /* libPods-FaceAISDK_RN-FaceAISDK_RNTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,8 +139,6 @@
 			children = (
 				F09DD468000C89AEB63B8221 /* Pods-FaceAISDK_RN.debug.xcconfig */,
 				725CB0924456CB21B99E2DC3 /* Pods-FaceAISDK_RN.release.xcconfig */,
-				D8C710959C33F219935506C4 /* Pods-FaceAISDK_RN-FaceAISDK_RNTests.debug.xcconfig */,
-				7B5A3FDCC2065FE057F01039 /* Pods-FaceAISDK_RN-FaceAISDK_RNTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -158,12 +150,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FaceAISDK_RNTests" */;
 			buildPhases = (
-				971AC68A00A662AE5D1C4E5C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				17DEED463A5CC0B1FC7C7C05 /* [CP] Embed Pods Frameworks */,
-				E3A6F89C41260EE9272916E7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,23 +259,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		17DEED463A5CC0B1FC7C7C05 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		34BF8A74F2976CBFDE17C260 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,28 +298,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		971AC68A00A662AE5D1C4E5C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FaceAISDK_RN-FaceAISDK_RNTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C1B21754F66518A93BFF2396 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,23 +313,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN/Pods-FaceAISDK_RN-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E3A6F89C41260EE9272916E7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FaceAISDK_RN-FaceAISDK_RNTests/Pods-FaceAISDK_RN-FaceAISDK_RNTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -415,7 +348,6 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8C710959C33F219935506C4 /* Pods-FaceAISDK_RN-FaceAISDK_RNTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -444,7 +376,6 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B5A3FDCC2065FE057F01039 /* Pods-FaceAISDK_RN-FaceAISDK_RNTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
