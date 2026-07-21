@@ -1,63 +1,31 @@
-# Resolve react_native_pods.rb with node to allow for hoisting
-require Pod::Executable.execute_command('node', ['-p',
-  'require.resolve(
-    "react-native/scripts/react_native_pods.rb",
-    {paths: [process.argv[1]]},
-  )', __dir__]).strip
-
-# SDK特殊处理 FaceAISDK faceaisdk_post_install.rb
+require Pod::Executable.execute_command('node', ['-p', 'require.resolve("react-native/scripts/react_native_pods.rb", {paths: [process.argv[1]]})', __dir__]).strip
 require_relative '../node_modules/@faceaisdk/react-native-face-sdk/scripts/faceaisdk_post_install.rb'
 
 platform :ios, '15.5'
 prepare_react_native_project!
 
-linkage = ENV['USE_FRAMEWORKS']
-if linkage != nil
-  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
-  use_frameworks! :linkage => linkage.to_sym
-end
-
 target 'FaceAISDK_RN' do
   config = use_native_modules!
 
-  # FaceAISDK_Core 2026.07.01 may not be available in the local CocoaPods trunk
-  # specs index yet, so pin it directly to the official Git tag.
+  # 强制锁定 FaceAISDK_Core 版本到官方 Git Tag
   pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.16.beta2'
 
   use_react_native!(
     :path => config[:reactNativePath],
-    # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'FaceAISDK_RNTests' do
-    inherit! :complete
-    # Pods for testing
-  end
-
   post_install do |installer|
-    # 1. 执行 React Native 标准的后置处理
-    react_native_post_install(
-      installer,
-      config[:reactNativePath],
-      :mac_catalyst_enabled => false
-    )
-
-    # 2. 调用 FaceAISDK 的后置处理
+    react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
     faceaisdk_post_install(installer)
-
 
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
-        # 1. 解决 non-modular-include 报错
-        config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
-
-        # 2. 针对真机编译的必要设置
-        config.build_settings['ENABLE_BITCODE'] = 'NO'
+        # 统一 iOS 部署目标与真机编译设置
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.5'
-
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
+        config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
       end
     end
   end
-
 end
