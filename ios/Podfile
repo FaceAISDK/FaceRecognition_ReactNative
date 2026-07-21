@@ -22,7 +22,7 @@ target 'FaceAISDK_RN' do
 
   # FaceAISDK_Core 2026.07.01 may not be available in the local CocoaPods trunk
   # specs index yet, so pin it directly to the official Git tag.
-  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.09'
+  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.16.beta2'
 
   use_react_native!(
     :path => config[:reactNativePath],
