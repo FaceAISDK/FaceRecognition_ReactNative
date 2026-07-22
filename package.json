@@ -1,6 +1,6 @@
 {
   "name": "@faceaisdk/react-native-face-sdk",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "React Native offline face enrollment, verification, and liveness detection SDK.",
   "license": "FaceAISDK License",
   "author": "FaceAISDK.Service@gmail.com",
