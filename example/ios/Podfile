@@ -19,7 +19,7 @@ end
 
 target 'FaceRN' do
   # 强制指定 FaceAISDK_Core 的 git 源和 tag，确保与插件 podspec 声明的版本一致
-  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.16.beta2'
+  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.17'
 
   config = use_native_modules!
 
