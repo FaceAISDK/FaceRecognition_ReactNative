@@ -58,30 +58,22 @@ public class ScreenBrightnessHelper {
     
     // MARK: - 内部私有方法
     
-    /// 获取当前亮度 (兼容 iOS 15+)
+    /// 获取当前亮度
     private func getCurrentBrightness() -> CGFloat {
-        if #available(iOS 15.0, *) {
-            // 优先获取活跃的前台 Scene
-            let scene = UIApplication.shared.connectedScenes
-                .filter { $0.activationState == .foregroundActive }
-                .compactMap { $0 as? UIWindowScene }
-                .first
-            return scene?.screen.brightness ?? UIScreen.main.brightness
-        } else {
-            return UIScreen.main.brightness
-        }
+        // 优先获取活跃的前台 Scene
+        let scene = UIApplication.shared.connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .compactMap { $0 as? UIWindowScene }
+            .first
+        return scene?.screen.brightness ?? UIScreen.main.brightness
     }
     
     private func setBrightness(_ value: CGFloat) {
-        if #available(iOS 15.0, *) {
-            if let scene = UIApplication.shared.connectedScenes
-                .filter({ $0.activationState == .foregroundActive })
-                .compactMap({ $0 as? UIWindowScene })
-                .first {
-                scene.screen.brightness = value
-            } else {
-                UIScreen.main.brightness = value
-            }
+        if let scene = UIApplication.shared.connectedScenes
+            .filter({ $0.activationState == .foregroundActive })
+            .compactMap({ $0 as? UIWindowScene })
+            .first {
+            scene.screen.brightness = value
         } else {
             UIScreen.main.brightness = value
         }

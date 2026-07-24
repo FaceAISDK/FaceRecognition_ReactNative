@@ -119,19 +119,18 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FaceSDK Version Too Old"
+            "value" : "SDK Version Too Old"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "FaceSDK Version Too Old"
           }
         }
       }
     },
     "Face_Tips_Code_(code)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -578,12 +577,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start Color Flash"
+            "value" : "Please move closer. Screen will flash"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "请靠近,屏幕即将闪烁"
           }
         }
@@ -629,12 +628,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Detection failed: Too bright.Please avoid direct light as below and use in a softly lit indoor environment"
+            "value" : "Failed,Too bright.Please avoid direct light as below and use in a softly lit indoor environment"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "炫彩活体检测失败,光线亮度过高;如图遮挡高亮光源或室内光线柔和环境使用"
           }
         }
@@ -646,12 +645,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Excessive light, avoid strong light exposure."
+            "value" : "Excessive light, avoid strong light exposure"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "光线过强,避免强光照射"
           }
         }
@@ -663,13 +662,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Liveness check failed. Please ensure soft lighting conditions."
+            "value" : "Avoid strong backlighting and busy backgrounds. Please move and try again"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "活体检测失败,请确认光线环境柔和"
+            "state" : "needs_review",
+            "value" : "请避开强逆光与杂乱背景，换个地方重试"
           }
         }
       }
@@ -685,7 +684,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "活体检测完成"
           }
         }
