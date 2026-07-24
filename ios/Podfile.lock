@@ -1,5 +1,5 @@
 PODS:
-  - FaceAISDK_Core (2026.07.16.beta2):
+  - FaceAISDK_Core (2026.07.22):
     - GoogleMLKit/FaceDetection (= 9.0.0)
     - TensorFlowLiteSwift (= 2.17.0)
   - FBLazyVector (0.84.0)
@@ -1450,7 +1450,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
   - react-native-face-sdk (0.6.0):
-    - FaceAISDK_Core (= 2026.07.16.beta2)
+    - FaceAISDK_Core (= 2026.07.22)
     - React-Core
   - React-NativeModulesApple (0.84.0):
     - hermes-engine
@@ -1849,7 +1849,7 @@ PODS:
   - Yoga (0.0.0)
 
 DEPENDENCIES:
-  - FaceAISDK_Core (from `https://github.com/FaceAISDK/FaceAISDK_Core.git`, tag `2026.07.16.beta2`)
+  - FaceAISDK_Core (from `https://github.com/FaceAISDK/FaceAISDK_Core.git`, tag `2026.07.22`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -1945,7 +1945,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   FaceAISDK_Core:
     :git: https://github.com/FaceAISDK/FaceAISDK_Core.git
-    :tag: 2026.07.16.beta2
+    :tag: 2026.07.22
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   hermes-engine:
@@ -2099,7 +2099,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   FaceAISDK_Core:
     :git: https://github.com/FaceAISDK/FaceAISDK_Core.git
-    :tag: 2026.07.16.beta2
+    :tag: 2026.07.22
 
 SPEC CHECKSUMS:
   FaceAISDK_Core: 141556e93e379c9e8c6e8cbecc5a39ab2053493c
@@ -2191,6 +2191,6 @@ SPEC CHECKSUMS:
   TensorFlowLiteSwift: 723fe42222815e72490c79feeff05305530de393
   Yoga: 772166513f9cd2d61a6251d0dacbbfaa5b537479
 
-PODFILE CHECKSUM: 63d29825eea8a9062a97a21c7f0ee793fe91e099
+PODFILE CHECKSUM: f0a5b7da56dc83df0212be1282cbe40ef4e81579
 
 COCOAPODS: 1.16.2

@@ -10,7 +10,7 @@ target 'FaceAISDK_RN' do
   config = use_native_modules!
 
   # 2. 强制锁定 FaceAISDK_Core 版本到官方 Git Tag 最新版本
-  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.16.beta2'
+  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.07.22'
 
   use_react_native!(
     :path => config[:reactNativePath],
