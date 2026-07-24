@@ -47,8 +47,8 @@ final class TTSPlayer: NSObject {
     private let log: OSLog
     
     /// 专用串行队列：保证去重、音频会话、播报状态处理顺序一致。
-    /// 使用 userInitiated 降低摄像头实时提示场景中的排队延迟。
-    private let workQueue = DispatchQueue(label: "com.faceAI.sdk.ttsPlayer", qos: .userInitiated)
+    /// AVSpeechSynthesizer/AudioSession 内部可能使用 default QoS 线程，使用 default 避免高 QoS 等待低 QoS 造成优先级反转告警。
+    private let workQueue = DispatchQueue(label: "com.faceAI.sdk.ttsPlayer", qos: .default)
 
     // 以下变量现在仅在 workQueue 中访问，天然线程安全
     private var isSessionActive = false
@@ -57,6 +57,10 @@ final class TTSPlayer: NSObject {
     private let sessionDeactivationDelay: TimeInterval = 8.0
 
     private var voiceCache: [String: AVSpeechSynthesisVoice] = [:]
+
+    /// 仅在 workQueue 访问，避免频繁同步读取 AVSpeechSynthesizer.isSpeaking/isPaused 触发 priority inversion。
+    private var synthesizerIsSpeaking = false
+    private var synthesizerIsPaused = false
 
     /// 只去重“相邻两次”的相同文字：A、A 只播第一次；A、B、A 中第二个 A 仍允许播。
     private var lastAcceptedTextKey: String?
@@ -122,7 +126,7 @@ final class TTSPlayer: NSObject {
 
             case .dropIfBusy:
                 // 默认策略：前一句没播完时，不打断，也不追加队列，避免提示越排越滞后。
-                guard !self.synthesizer.isSpeaking && !self.synthesizer.isPaused else { return }
+                guard !self.synthesizerIsSpeaking && !self.synthesizerIsPaused else { return }
             }
 
             self.lastAcceptedTextKey = textKey
@@ -141,6 +145,8 @@ final class TTSPlayer: NSObject {
             utterance.postUtteranceDelay = 0.03
             utterance.voice = self.cachedVoice(for: lang)
 
+            self.synthesizerIsSpeaking = true
+            self.synthesizerIsPaused = false
             self.synthesizer.speak(utterance)
         }
     }
@@ -164,8 +170,9 @@ final class TTSPlayer: NSObject {
     func pause() {
         workQueue.async { [weak self] in
             guard let self = self else { return }
-            if self.synthesizer.isSpeaking {
-                self.synthesizer.pauseSpeaking(at: .word)
+            if self.synthesizerIsSpeaking, self.synthesizer.pauseSpeaking(at: .word) {
+                self.synthesizerIsSpeaking = false
+                self.synthesizerIsPaused = true
             }
         }
     }
@@ -173,9 +180,12 @@ final class TTSPlayer: NSObject {
     func resume() {
         workQueue.async { [weak self] in
             guard let self = self else { return }
-            if self.synthesizer.isPaused {
+            if self.synthesizerIsPaused {
                 self.activateSessionIfNeeded()
-                self.synthesizer.continueSpeaking()
+                if self.synthesizer.continueSpeaking() {
+                    self.synthesizerIsSpeaking = true
+                    self.synthesizerIsPaused = false
+                }
             }
         }
     }
@@ -192,9 +202,11 @@ final class TTSPlayer: NSObject {
     }
     
     private func stopSynthesizerIfActive() {
-        if synthesizer.isSpeaking || synthesizer.isPaused {
+        if synthesizerIsSpeaking || synthesizerIsPaused {
             synthesizer.stopSpeaking(at: .immediate)
         }
+        synthesizerIsSpeaking = false
+        synthesizerIsPaused = false
     }
 
     // MARK: - Audio Session (仅在 workQueue 内调用)
@@ -262,8 +274,10 @@ final class TTSPlayer: NSObject {
             
             switch type {
             case .began:
-                self.interruptedBySystem = self.synthesizer.isSpeaking || self.synthesizer.isPaused
+                self.interruptedBySystem = self.synthesizerIsSpeaking || self.synthesizerIsPaused
                 self.isSessionActive = false
+                self.synthesizerIsSpeaking = false
+                self.synthesizerIsPaused = false
 
             case .ended:
                 let shouldResume = self.interruptedBySystem
@@ -271,7 +285,10 @@ final class TTSPlayer: NSObject {
 
                 if shouldResume, options.contains(.shouldResume) {
                     self.activateSessionIfNeeded()
-                    self.synthesizer.continueSpeaking()
+                    if self.synthesizer.continueSpeaking() {
+                        self.synthesizerIsSpeaking = true
+                        self.synthesizerIsPaused = false
+                    }
                 } else if shouldResume {
                     self.stopSynthesizerIfActive()
                 }
@@ -289,8 +306,10 @@ final class TTSPlayer: NSObject {
 
         if reason == .oldDeviceUnavailable {
             workQueue.async { [weak self] in
-                if self?.synthesizer.isSpeaking == true {
-                    self?.synthesizer.pauseSpeaking(at: .word)
+                guard let self = self else { return }
+                if self.synthesizerIsSpeaking, self.synthesizer.pauseSpeaking(at: .word) {
+                    self.synthesizerIsSpeaking = false
+                    self.synthesizerIsPaused = true
                 }
             }
         }
@@ -367,28 +386,46 @@ final class TTSPlayer: NSObject {
 extension TTSPlayer: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        workQueue.async { [weak self] in
+            self?.synthesizerIsSpeaking = true
+            self?.synthesizerIsPaused = false
+        }
         updateStateOnMainThread(.speaking(utterance.speechString))
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         updateStateOnMainThread(.idle)
         workQueue.async { [weak self] in
-            self?.scheduleDeactivation()
+            guard let self = self else { return }
+            self.synthesizerIsSpeaking = false
+            self.synthesizerIsPaused = false
+            self.scheduleDeactivation()
         }
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         updateStateOnMainThread(.idle)
         workQueue.async { [weak self] in
-            self?.scheduleDeactivation()
+            guard let self = self else { return }
+            self.synthesizerIsSpeaking = false
+            self.synthesizerIsPaused = false
+            self.scheduleDeactivation()
         }
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        workQueue.async { [weak self] in
+            self?.synthesizerIsSpeaking = false
+            self?.synthesizerIsPaused = true
+        }
         updateStateOnMainThread(.paused)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
+        workQueue.async { [weak self] in
+            self?.synthesizerIsSpeaking = true
+            self?.synthesizerIsPaused = false
+        }
         updateStateOnMainThread(.speaking(utterance.speechString))
     }
 }

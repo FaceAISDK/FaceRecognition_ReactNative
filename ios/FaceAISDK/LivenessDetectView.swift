@@ -19,8 +19,9 @@ struct LivenessDetectView: View {
     // 自动控制屏幕亮度
     var autoControlBrightness: Bool = true
     
-    // 0. No liveness detection  1. Motion only  2. Motion + Color flash  3. Color flash only
-    // 0. 无需活体检测 1.仅仅动作 2.动作+炫彩 3.炫彩
+    // Type 1，2，3 include 4 Silent liveness Default 活体检测类型1，2，3默认包含4 静默活体
+    // 0. No liveness detection  1. Motion   2. Motion + Color flash  3. Color flash   4.Only Silent liveness detection
+    // 0. 无需活体检测 1.动作活体 2.动作+炫彩 3.炫彩 4.仅仅静默活体检测
     let livenessType:Int
     
     // Types of motion liveness:  1. Open mouth  2. Smile  3. Blink  4. Shake head  5. Nod
@@ -75,27 +76,25 @@ struct LivenessDetectView: View {
                 
                 if isTipAppeared {
                     Text(localizedTips(for: viewModel.sdkInterfaceTips.code))
-                        .font(.system(size: 20).bold())
-                        .padding(.horizontal, 20)
+                        .font(.system(size: 21).bold())
+                        .padding(.horizontal, 15)
                         .padding(.vertical, 8)
                         .foregroundColor(.white)
                         .background(Color.faceMain)
                         .cornerRadius(20)
-                        .id(viewModel.sdkInterfaceTips.code)
                         .transition(.asymmetric(
-                            insertion: .scale(scale: 0.8).combined(with: .opacity),
+                            insertion: .scale(scale: 0.9).combined(with: .opacity),
                             removal: .opacity
                         ))
-                        .animation(.spring(response: 0.4, dampingFraction: 0.6), value: viewModel.sdkInterfaceTips.code)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: viewModel.sdkInterfaceTips.code)
                 }
                 
                 
                 Text(localizedTips(for: viewModel.sdkInterfaceTipsExtra.code))
-                    .font(.system(size: 20).bold())
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 8)
+                    .font(.system(size: 21, weight: .bold))
+                    .padding(.bottom, 6)
                     .frame(minHeight: 30)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.faceMain)
                 
                 FaceSDKCameraView(session: viewModel.captureSession, cameraSize: FaceCameraSize)
                     .frame(width: FaceCameraSize, height: FaceCameraSize)
