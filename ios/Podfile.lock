@@ -1449,7 +1449,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-face-sdk (0.6.0):
+  - react-native-face-sdk (1.0.0):
     - FaceAISDK_Core (= 2026.07.22)
     - React-Core
   - React-NativeModulesApple (0.84.0):
@@ -2102,7 +2102,7 @@ CHECKOUT OPTIONS:
     :tag: 2026.07.22
 
 SPEC CHECKSUMS:
-  FaceAISDK_Core: 141556e93e379c9e8c6e8cbecc5a39ab2053493c
+  FaceAISDK_Core: bb89426f52cf15d177906b8786c547d41c78510b
   FBLazyVector: c12d2108050e27952983d565a232f6f7b1ad5e69
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleMLKit: b1eee21a41c57704fe72483b15c85cb2c0cd7444
@@ -2152,7 +2152,7 @@ SPEC CHECKSUMS:
   React-logger: 9e51e01455f15cb3ef87a09a1ec773cdb22d56c1
   React-Mapbuffer: 92b99e450e8ff598b27d6e4db3a75e04fd45e9a9
   React-microtasksnativemodule: 2fe0f2bd2840dedbd66c0ac249c64f977f39cc18
-  react-native-face-sdk: 62c80dccc863dea0792d7b57ca1311b138cf2224
+  react-native-face-sdk: 22b218d332232b2db780a043e9e14bce81435afd
   React-NativeModulesApple: 44a9474594566cd03659f92e38f42599c6b9dee4
   React-networking: db73d91466cb134fcbdaaa579fb2de14e2c2ea01
   React-oscompat: b924b8609d06899f00ab1aa813b0cde9c5e12771
@@ -2191,6 +2191,6 @@ SPEC CHECKSUMS:
   TensorFlowLiteSwift: 723fe42222815e72490c79feeff05305530de393
   Yoga: 772166513f9cd2d61a6251d0dacbbfaa5b537479
 
-PODFILE CHECKSUM: f0a5b7da56dc83df0212be1282cbe40ef4e81579
+PODFILE CHECKSUM: 522306884bce5a3faa4d4c736925e5b919507974
 
 COCOAPODS: 1.16.2
