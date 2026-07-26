@@ -1,22 +1,17 @@
 {
-  "name": "FaceRecognition",
-  "version": "1.1.0",
+  "name": "faceaisdk-react-native-demo",
+  "version": "1.0.0",
   "private": true,
-  "files": [
-    "scripts",
-    "ios",
-    "android",
-    "index.js",
-    "README.md"
-  ],
   "scripts": {
-    "android": "react-native run-android --mode release --port 8765",
-    "ios": "react-native run-ios --mode Release --port 8765",
-    "lint": "eslint .",
+    "android": "react-native run-android --port 8765",
+    "ios": "react-native run-ios --device --port 8765",
+    "lint": "eslint App.tsx __tests__",
     "start": "react-native start --port 8765",
-    "test": "jest"
+    "test": "jest --runInBand",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@faceaisdk/react-native-face-sdk": "^1.1.0",
     "react": "19.2.3",
     "react-native": "0.84.0"
   },
@@ -42,6 +37,6 @@
     "typescript": "5.0.4"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.11"
   }
 }

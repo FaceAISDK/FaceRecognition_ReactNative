@@ -1,68 +1,19 @@
-/**
- * @format
- */
-
-import 'react-native';
 import React from 'react';
-import App, {normalizeFaceResult, resolveLanguage} from '../App';
-
-// Note: import explicitly to use the types shipped with jest.
+import renderer, {act} from 'react-test-renderer';
 import {expect, it} from '@jest/globals';
 
-// Note: test renderer must be required after react-native.
-import renderer, {act} from 'react-test-renderer';
+import App, {resolveLanguage} from '../App';
 
-it('renders correctly', async () => {
+it('renders the SDK demo', async () => {
   await act(async () => {
     renderer.create(<App />);
   });
 });
 
-it('uses Chinese only for Chinese system locales', () => {
+it('uses Chinese for simplified and traditional Chinese locales', () => {
   expect(resolveLanguage('zh-Hans-CN')).toBe('zh');
-  expect(resolveLanguage('zh_TW')).toBe('zh');
-  expect(resolveLanguage('ja-JP')).toBe('en');
+  expect(resolveLanguage('zh-Hant-TW')).toBe('zh');
+  expect(resolveLanguage('zh_HK')).toBe('zh');
+  expect(resolveLanguage('en-US')).toBe('en');
   expect(resolveLanguage(undefined)).toBe('en');
-});
-
-it('normalizes native object results', () => {
-  expect(
-    normalizeFaceResult({
-      code: '1',
-      message: 'success',
-      faceId: 'user001',
-      score: '0.91',
-      livenessScore: 0.88,
-      feature: 'feature-value',
-      imageBase64: 'base64-value',
-    }),
-  ).toEqual({
-    code: 1,
-    msg: 'success',
-    faceID: 'user001',
-    similarity: 0.91,
-    liveness: 0.88,
-    faceFeature: 'feature-value',
-    faceBase64: 'base64-value',
-  });
-});
-
-it('normalizes JSON string and nested results', () => {
-  expect(
-    normalizeFaceResult(
-      JSON.stringify({
-        data: {
-          resultCode: 10,
-          msg: 'liveness passed',
-          faceID: 'user001',
-          similarity: 0.93,
-        },
-      }),
-    ),
-  ).toMatchObject({
-    code: 10,
-    msg: 'liveness passed',
-    faceID: 'user001',
-    similarity: 0.93,
-  });
 });
