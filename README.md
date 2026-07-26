@@ -10,7 +10,7 @@ React Native offline face enrollment, verification, and liveness detection SDK. 
 
 > ⚠️ **Important**: This SDK involves low-level hardware and native algorithms. **It must be tested on a physical device**; it will not function on an emulator.
 
-### Installation
+### Installation the newest version
 
 ```bash
 npm install @faceaisdk/react-native-face-sdk@latest
@@ -104,7 +104,7 @@ FaceAISDK 人脸识别、活体检测 React Native 原生插件，支持 iOS 和
 
 > ⚠️ **重要提示**：本 SDK 涉及底层硬件与原生算法，**必须使用真机测试**，模拟器无法运行。
 
-### 安装
+### 安装最新版本
 
 ```bash
 npm install @faceaisdk/react-native-face-sdk@latest
