@@ -1,6 +1,6 @@
 {
-  "name": "FaceAISDK_RN",
-  "version": "0.3.2",
+  "name": "FaceRecognition",
+  "version": "1.1.0",
   "private": true,
   "files": [
     "scripts",
@@ -10,14 +10,13 @@
     "README.md"
   ],
   "scripts": {
-    "android": "react-native run-android --port 8765",
-    "ios": "react-native run-ios --port 8765",
+    "android": "react-native run-android --mode release --port 8765",
+    "ios": "react-native run-ios --mode Release --port 8765",
     "lint": "eslint .",
     "start": "react-native start --port 8765",
     "test": "jest"
   },
   "dependencies": {
-    "@faceaisdk/react-native-face-sdk": "^1.1.0",
     "react": "19.2.3",
     "react-native": "0.84.0"
   },
