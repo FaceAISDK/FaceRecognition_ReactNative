@@ -1,85 +1,76 @@
+// FaceAISDK.Service@gmail.com , https://github.com/FaceAISDK
+
 import UIKit
 
-// 亮度控制单例工具，为了兼容uniapp Flutter等插件
+/// Controls screen brightness and idle behavior for native and hybrid hosts.
+/// 为原生及 uni-app、Flutter 等混合宿主控制屏幕亮度与自动锁屏。
 public class ScreenBrightnessHelper {
-    
-    // 单例入口
+
     public static let shared = ScreenBrightnessHelper()
-    
-    // 内部状态
+
     private var originalBrightness: CGFloat?
     private var wasIdleTimerDisabled: Bool = false
-    
-    // 防止重复设置的标记
     private var isMaximized = false
-    
+
     private init() {}
-        
-    /// 保存当前环境并调至最亮 (线程安全)
+
+    /// Saves the current state and maximizes brightness safely. 保存当前状态并线程安全地调至最亮。
     public func maximizeBrightness() {
         runOnMain { [weak self] in
             guard let self = self else { return }
-            
-            // 1. 如果当前没有处于“已调亮”状态，才保存原始值
-            // 这样可以防止连续调用 maximize 导致把 1.0 误保存为原始亮度
+
+            // Save once so repeated calls never overwrite the original value. 仅保存一次，避免重复调用覆盖原始亮度。
             if !self.isMaximized {
                 self.originalBrightness = self.getCurrentBrightness()
                 self.wasIdleTimerDisabled = UIApplication.shared.isIdleTimerDisabled
                 self.isMaximized = true
             }
-            
-            // 2. 调亮屏幕
+
             self.setBrightness(1.0)
-            
-            // 3. 禁止自动锁屏
+
+            // Prevent screen lock during face capture. 人脸采集期间禁止自动锁屏。
             UIApplication.shared.isIdleTimerDisabled = true
         }
     }
-    
-    /// 恢复环境 (线程安全)
+
+    /// Restores the saved brightness and idle state safely. 线程安全地恢复亮度和自动锁屏状态。
     public func restoreBrightness() {
         runOnMain { [weak self] in
             guard let self = self else { return }
-            
-            // 只有在“已调亮”状态下才执行恢复
+
             guard self.isMaximized, let original = self.originalBrightness else { return }
-            
-            // 1. 恢复亮度
+
             self.setBrightness(original)
-            
-            // 2. 恢复锁屏设置
             UIApplication.shared.isIdleTimerDisabled = self.wasIdleTimerDisabled
-            
-            // 3. 重置状态
             self.isMaximized = false
             self.originalBrightness = nil
         }
     }
-    
-    // MARK: - 内部私有方法
-    
-    /// 获取当前亮度
+
+    // MARK: - Private helpers / 私有辅助方法
+
+    /// Reads brightness from the active foreground scene. 从当前前台场景读取亮度。
     private func getCurrentBrightness() -> CGFloat {
-        // 优先获取活跃的前台 Scene
         let scene = UIApplication.shared.connectedScenes
             .filter { $0.activationState == .foregroundActive }
             .compactMap { $0 as? UIWindowScene }
             .first
         return scene?.screen.brightness ?? UIScreen.main.brightness
     }
-    
+
     private func setBrightness(_ value: CGFloat) {
         if let scene = UIApplication.shared.connectedScenes
             .filter({ $0.activationState == .foregroundActive })
             .compactMap({ $0 as? UIWindowScene })
-            .first {
+            .first
+        {
             scene.screen.brightness = value
         } else {
             UIScreen.main.brightness = value
         }
     }
-    
-    /// 辅助方法：确保闭包在主线程执行
+
+    /// Runs UIKit changes on the main thread. 在主线程执行 UIKit 状态修改。
     private func runOnMain(_ block: @escaping () -> Void) {
         if Thread.isMainThread {
             block()

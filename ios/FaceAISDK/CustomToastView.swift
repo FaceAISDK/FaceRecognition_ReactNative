@@ -1,9 +1,9 @@
+// FaceAISDK.Service@gmail.com , https://github.com/FaceAISDK
+
 import Foundation
 import SwiftUI
 
-//  Created by anylife on 2025/12/2.
-
-// 定义 Toast 样式
+// Defines the visual result style. 定义结果提示的视觉样式。
 enum ToastStyle {
     case success
     case failure
@@ -14,6 +14,7 @@ enum ToastStyle {
         }
     }
 }
+
 struct CustomToastView: View {
     let message: String
     let style: ToastStyle

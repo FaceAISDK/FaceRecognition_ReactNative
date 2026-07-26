@@ -6,7 +6,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "About us"
+            "value" : "About Us"
           }
         },
         "zh-Hans" : {
@@ -22,7 +22,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Face By Camera"
+            "value" : "Add Face with Camera"
           }
         },
         "zh-Hans" : {
@@ -38,7 +38,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Face From Album"
+            "value" : "Add Face from Album"
           }
         },
         "zh-Hans" : {
@@ -70,29 +70,29 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Confirm Add Face"
+            "value" : "Confirm Face Registration"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "确认录入此人脸图？"
+            "value" : "确认录入此人脸？"
           }
         }
       }
     },
-    "Ensure face is clear" : {
+    "Ensure the face is clear and fully visible" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ensure face is clear"
+            "value" : "Ensure the face is clear and fully visible"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "请录入无遮挡正脸清晰图"
+            "value" : "请确保人脸清晰、完整且无遮挡"
           }
         }
       }
@@ -102,7 +102,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face Verify & Liveness"
+            "value" : "Face Verification & Liveness"
           }
         },
         "zh-Hans" : {
@@ -124,18 +124,19 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "FaceSDK Version Too Old"
+            "state" : "translated",
+            "value" : "SDK Version Too Old"
           }
         }
       }
     },
     "Face_Tips_Code_(code)" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "error"
+            "value" : "Unknown Error"
           }
         },
         "zh-Hans" : {
@@ -152,7 +153,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keep Face Frontal"
+            "value" : "Look Straight at the Camera"
           }
         },
         "zh-Hans" : {
@@ -186,7 +187,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Detect Too Many Face"
+            "value" : "Too Many Faces Detected"
           }
         },
         "zh-Hans" : {
@@ -203,7 +204,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please Come Closer"
+            "value" : "Please Move Closer"
           }
         },
         "zh-Hans" : {
@@ -220,7 +221,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keep Face Frontal Visible"
+            "value" : "Keep Your Face Still"
           }
         },
         "zh-Hans" : {
@@ -237,7 +238,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do not Close Eye"
+            "value" : "Keep Your Eyes Open"
           }
         },
         "zh-Hans" : {
@@ -254,7 +255,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn Face Right"
+            "value" : "Turn Your Head Right"
           }
         },
         "zh-Hans" : {
@@ -271,7 +272,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn Face Left"
+            "value" : "Turn Your Head Left"
           }
         },
         "zh-Hans" : {
@@ -288,7 +289,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do not Tile Face"
+            "value" : "Do Not Tilt Your Head"
           }
         },
         "zh-Hans" : {
@@ -305,7 +306,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn Face Up"
+            "value" : "Raise Your Head"
           }
         },
         "zh-Hans" : {
@@ -322,7 +323,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn Face Down"
+            "value" : "Lower Your Head"
           }
         },
         "zh-Hans" : {
@@ -339,7 +340,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Confirm  Add Face"
+            "value" : "Confirm Face Registration"
           }
         },
         "zh-Hans" : {
@@ -373,7 +374,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Too Small Face"
+            "value" : "Face Too Small"
           }
         },
         "zh-Hans" : {
@@ -390,7 +391,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face Image Not Found "
+            "value" : "Face Image Not Found"
           }
         },
         "zh-Hans" : {
@@ -407,7 +408,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face Image Dispose Failed"
+            "value" : "Failed to Process Face Image"
           }
         },
         "zh-Hans" : {
@@ -458,7 +459,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Motion Liveness  Timeout"
+            "value" : "Motion Liveness Timeout"
           }
         },
         "zh-Hans" : {
@@ -475,7 +476,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Face Detected Multi Time"
+            "value" : "Face Detection Failed Multiple Times"
           }
         },
         "zh-Hans" : {
@@ -492,7 +493,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open Mouth"
+            "value" : "Open Your Mouth"
           }
         },
         "zh-Hans" : {
@@ -543,7 +544,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please Shake Head"
+            "value" : "Shake Your Head"
           }
         },
         "zh-Hans" : {
@@ -560,7 +561,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please Nod Head"
+            "value" : "Nod Your Head"
           }
         },
         "zh-Hans" : {
@@ -577,12 +578,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please move closer. Screen will flash"
+            "value" : "Please move closer. The screen will flash"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "请靠近,屏幕即将闪烁"
           }
         }
@@ -594,7 +595,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Color Flash Success"
+            "value" : "Color Flash Liveness Successful"
           }
         },
         "zh-Hans" : {
@@ -611,7 +612,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Color Flash Failed"
+            "value" : "Color Flash Liveness Failed"
           }
         },
         "zh-Hans" : {
@@ -628,12 +629,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed,Too bright.Please avoid direct light as below and use in a softly lit indoor environment"
+            "value" : "Failed. The light is too bright. Please avoid direct light and use a softly lit indoor environment"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "炫彩活体检测失败,光线亮度过高;如图遮挡高亮光源或室内光线柔和环境使用"
           }
         }
@@ -645,12 +646,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Excessive light, avoid strong light exposure"
+            "value" : "Too much light. Avoid strong light exposure"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "光线过强,避免强光照射"
           }
         }
@@ -662,13 +663,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avoid strong backlighting and busy backgrounds. Please move and try again"
+            "value" : "Avoid strong backlighting and busy backgrounds. Try a different angle or location"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "请避开强逆光与杂乱背景，换个地方重试"
+            "state" : "translated",
+            "value" : "请避开强逆光与杂乱背景，换个角度或地方重试"
           }
         }
       }
@@ -679,12 +680,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face Liveness Success"
+            "value" : "Liveness Detection Successful"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "活体检测完成"
           }
         }
@@ -696,7 +697,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face Verify Success"
+            "value" : "Verification Successful"
           }
         },
         "zh-Hans" : {
@@ -713,7 +714,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face Verify Failed"
+            "value" : "Verification Failed"
           }
         },
         "zh-Hans" : {
@@ -729,7 +730,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I Know"
+            "value" : "Got It"
           }
         },
         "zh-Hans" : {
@@ -755,7 +756,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ONLY Liveness Detection"
+            "value" : "Liveness Detection Only"
           }
         },
         "zh-Hans" : {
@@ -787,7 +788,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save Face Feature"
+            "value" : "Save Face Features"
           }
         },
         "zh-Hans" : {
@@ -803,7 +804,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select from album"
+            "value" : "Select from Album"
           }
         },
         "zh-Hans" : {
@@ -814,29 +815,12 @@
         }
       }
     },
-    "Select Image" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Image"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择图片"
-          }
-        }
-      }
-    },
     "Verify Two Face Similarity" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verify Two Face Similarity"
+            "value" : "Compare Two Faces"
           }
         },
         "zh-Hans" : {

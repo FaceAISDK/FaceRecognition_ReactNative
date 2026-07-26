@@ -1,8 +1,10 @@
-import SwiftUI
-import PhotosUI
-import FaceAISDK_Core
+// FaceAISDK.Service@gmail.com , https://github.com/FaceAISDK
 
-// 定义单侧人脸的数据模型
+import FaceAISDK_Core
+import PhotosUI
+import SwiftUI
+
+// Holds one side of the face comparison. 保存单侧人脸比对数据。
 struct FaceSlot {
     var originalImage: UIImage?
     var croppedImage: UIImage?
@@ -10,29 +12,30 @@ struct FaceSlot {
     var isLoading: Bool = false
 }
 
-//SDK API viewModel.evaluateSimilarity(f1: f1, f2: f2)
+// SDK API: viewModel.evaluateSimilarity(f1:f2:).
+// SDK 接口：viewModel.evaluateSimilarity(f1:f2:)。
 public struct VerifyTwoFaceSimiView: View {
-    // 恢复 dismiss 以支持自定义导航栏返回
+    // Supports the custom back action. 支持自定义返回操作。
     @Environment(\.dismiss) private var dismiss
-    
+
     @State private var leftSlot = FaceSlot()
     @State private var rightSlot = FaceSlot()
-    
+
     @StateObject private var viewModel = VerifyTwoFaceSimiModel()
     @State private var similarityResult: String = ""
     @State private var activePicker: PickerType?
-    
-    // CustomToastView 相关状态
+
+    // Toast presentation state. Toast 展示状态。
     @State private var showToast = false
     @State private var toastMessage = ""
     @State private var toastStyle: ToastStyle = .success
-    
+
     enum PickerType: Identifiable {
         case left, right
         var id: Int { hashValue }
     }
-    
-    // 干净的初始化方法
+
+    // Public initializer for SDK samples. SDK 示例使用的公开初始化方法。
     public init() {}
 
     public var body: some View {
@@ -80,7 +83,7 @@ public struct VerifyTwoFaceSimiView: View {
                             .padding(.horizontal, 33)
                         }
 
-                        // MARK: - 4. 操作按钮
+                        // MARK: - Compare action / 比对操作
                         Button(action: runComparison) {
                             Text("Verify Two Face Similarity")
                                 .font(.headline).foregroundColor(.white)
@@ -97,7 +100,7 @@ public struct VerifyTwoFaceSimiView: View {
             .background(Color.white.ignoresSafeArea())
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
-            
+
             if showToast {
                 VStack {
                     Spacer()
@@ -117,20 +120,20 @@ public struct VerifyTwoFaceSimiView: View {
                 handleImageSelected(uiImage, for: type)
             }
         }
-        // 监听 Model 提示状态改变，弹出 Toast
+        // Presents model status changes as toast messages. 将模型状态变化显示为 Toast。
         .onChange(of: viewModel.sdkInterfaceTips.code) { code in
             if code != 0 {
                 let msg = NSLocalizedString("Face_Tips_Code_\(code)", comment: "")
                 toastMessage = msg
-                
-                // 简单约定：如果检测到人脸（Code为确认录入等）视为 success，否则视为 failure
+
+                // Treats a confirmed face as success; other codes are failures. 确认检测到人脸视为成功，其他状态视为失败。
                 toastStyle = (code == FaceTipsCode.CONFIRM_ADD_FACE) ? .success : .failure
-                
+
                 withAnimation {
                     showToast = true
                 }
-                
-                // 2秒后自动隐藏 Toast
+
+                // Hides the toast automatically. 自动隐藏 Toast。
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
                         showToast = false
@@ -145,9 +148,9 @@ public struct VerifyTwoFaceSimiView: View {
         leftSlot.feature != nil && rightSlot.feature != nil
     }
 
-    // 处理图片选择后的初始化与直接回调闭包
+    // Resets and processes the selected side. 重置并处理选中的一侧。
     private func handleImageSelected(_ image: UIImage, for type: PickerType) {
-        // 选择图片后，先重置当前 Slot 的状态
+        // Clears stale state before processing. 处理前清除旧状态。
         if type == .left {
             leftSlot.originalImage = image
             leftSlot.isLoading = true
@@ -157,10 +160,10 @@ public struct VerifyTwoFaceSimiView: View {
             rightSlot.isLoading = true
             rightSlot.feature = nil
         }
-        
-        // 调用 Model 闭包处理人脸
+
+        // Processes and publishes the cropped face and feature. 处理并更新裁剪人脸及特征。
         viewModel.processImage(image) { croppedImage, feature in
-            // 无论成功还是失败，都会走到这里，从而安全地关闭 Loading 状态
+            // Always ends loading on success or failure. 无论成功失败都结束加载状态。
             if type == .left {
                 leftSlot.isLoading = false
                 leftSlot.croppedImage = croppedImage
@@ -170,7 +173,7 @@ public struct VerifyTwoFaceSimiView: View {
                 rightSlot.croppedImage = croppedImage
                 rightSlot.feature = feature
             }
-            similarityResult = "" //清空之前的结果
+            similarityResult = ""
         }
     }
 
@@ -180,7 +183,7 @@ public struct VerifyTwoFaceSimiView: View {
         similarityResult = String(format: "%.2f%%", score * 100)
     }
 
-    // 复用 UI 组件
+    // Shared face-slot component. 通用人脸槽位组件。
     @ViewBuilder
     private func faceBox(slot: FaceSlot, action: @escaping () -> Void) -> some View {
         Button(action: action) {
@@ -193,7 +196,7 @@ public struct VerifyTwoFaceSimiView: View {
                             .font(.largeTitle)
                     }.foregroundColor(.gray)
                 }
-                
+
                 if slot.isLoading {
                     ZStack {
                         Color.black.opacity(0.3)
