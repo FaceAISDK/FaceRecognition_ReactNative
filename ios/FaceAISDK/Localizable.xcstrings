@@ -17,34 +17,18 @@
         }
       }
     },
-    "Add Face By Camera" : {
+    "Compare Two Faces" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Face with Camera"
+            "value" : "Compare Two Faces"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SDK相机添加人脸"
-          }
-        }
-      }
-    },
-    "Add Face From Album" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Face from Album"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从相册添加一人脸"
+            "value" : "人脸图相似对比"
           }
         }
       }
@@ -65,28 +49,60 @@
         }
       }
     },
-    "Confirm Add Face" : {
+    "Confirm & Enroll" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Confirm Face Registration"
+            "value" : "Confirm & Enroll"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "确认录入此人脸？"
+            "value" : "确认人脸录入"
           }
         }
       }
     },
-    "Ensure the face is clear and fully visible" : {
+    "Enroll Face By Camera" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ensure the face is clear and fully visible"
+            "value" : "Enroll Face By Camera"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过相机录入人脸"
+          }
+        }
+      }
+    },
+    "Enroll Face From Album" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enroll Face From Album"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从相册图片录入人脸"
+          }
+        }
+      }
+    },
+    "Ensure face is clear and fully visible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensure  face is clear and fully visible"
           }
         },
         "zh-Hans" : {
@@ -153,7 +169,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Look Straight at the Camera"
+            "value" : "Face the Camera"
           }
         },
         "zh-Hans" : {
@@ -221,7 +237,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keep Your Face Still"
+            "value" : "Keep Face Still"
           }
         },
         "zh-Hans" : {
@@ -238,7 +254,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keep Your Eyes Open"
+            "value" : "Keep  Eyes Open"
           }
         },
         "zh-Hans" : {
@@ -255,7 +271,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn Your Head Right"
+            "value" : "Turn  Head Right"
           }
         },
         "zh-Hans" : {
@@ -272,7 +288,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn Your Head Left"
+            "value" : "Turn  Head Left"
           }
         },
         "zh-Hans" : {
@@ -680,7 +696,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Liveness Detection Successful"
+            "value" : "Liveness Passed"
           }
         },
         "zh-Hans" : {
@@ -725,7 +741,7 @@
         }
       }
     },
-    "I Know" : {
+    "Got It" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -743,6 +759,12 @@
     },
     "Is Face Feature Exist" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Is Face Feature Exist"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -751,7 +773,7 @@
         }
       }
     },
-    "ONLY Liveness Detection" : {
+    "Liveness Detection Only" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -811,22 +833,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "从相册选择"
-          }
-        }
-      }
-    },
-    "Verify Two Face Similarity" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare Two Faces"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "静态人脸相似度对比"
           }
         }
       }

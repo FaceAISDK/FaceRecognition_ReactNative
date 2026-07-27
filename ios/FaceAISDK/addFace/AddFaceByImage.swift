@@ -48,7 +48,7 @@ public struct AddFaceByImage: View {
                     }
 
                     // Page title. 页面标题。
-                    Text("Add Face From Album")
+                    Text("Enroll Face From Album")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.black)
 

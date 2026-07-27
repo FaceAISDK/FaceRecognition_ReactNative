@@ -52,7 +52,7 @@ public struct VerifyTwoFaceSimiView: View {
                             .background(Color.gray.opacity(0.1))
                             .clipShape(Circle())
                     }
-                    Text("Verify Two Face Similarity")
+                    Text("Compare Two Faces")
                         .font(.headline)
                     Spacer()
                 }
@@ -85,7 +85,7 @@ public struct VerifyTwoFaceSimiView: View {
 
                         // MARK: - Compare action / 比对操作
                         Button(action: runComparison) {
-                            Text("Verify Two Face Similarity")
+                            Text("Compare Two Faces")
                                 .font(.headline).foregroundColor(.white)
                                 .frame(maxWidth: .infinity).frame(height: 55)
                                 .background(canCompare ? Color.blue : Color.gray)

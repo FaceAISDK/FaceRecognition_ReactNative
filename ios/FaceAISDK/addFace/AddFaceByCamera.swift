@@ -51,8 +51,9 @@ public struct AddFaceByCamera: View {
             && code != FaceTipsCode.NO_FACE_DETECTED
             && code != FaceTipsCode.CONFIRM_ADD_FACE
             && code != FaceTipsCode.CLEAN_TIPS
+        
         guard shouldSpeak else {
-            TTSPlayer.shared.stop()
+            //TTSPlayer.shared.stop()
             return
         }
         TTSPlayer.shared.speak(localizedTips(for: code), policy: .interrupt)
@@ -150,7 +151,6 @@ public struct AddFaceByCamera: View {
                 speakTipsIfNeeded(for: newValue)
             }
             .onChange(of: viewModel.readyConfirmFace) { _ in
-                print("viewModel.readyConfirmFace is now \(viewModel.readyConfirmFace)")
 
                 guard viewModel.readyConfirmFace else { return }
                 if needShowConfirmDialog {
@@ -223,11 +223,11 @@ struct ConfirmAddFaceDialog: View {
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.faceMain)
                 }
-                .frame(width: 28, height: 28)
+                .frame(width: 30, height: 30)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Confirm Add Face")
-                        .font(.system(size: 18, weight: .bold))
+                    Text("Confirm & Enroll")
+                        .font(.system(size: 19, weight: .bold))
                         .foregroundColor(.primary)
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
@@ -239,7 +239,7 @@ struct ConfirmAddFaceDialog: View {
             Image(uiImage: viewModel.originFaceImage)
                 .resizable()
                 .scaledToFill()
-                .frame(width: previewWidth-11, height: previewWidth)
+                .frame(width: previewWidth-12, height: previewWidth)
                 .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -247,15 +247,16 @@ struct ConfirmAddFaceDialog: View {
                 )
                 .shadow(color: Color.black.opacity(0.10), radius: 6, x: 0, y: 3)
 
-            Label("Ensure the face is clear and fully visible", systemImage: "sparkles")
+            Label("Ensure face is clear and fully visible", systemImage: "sparkles")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .lineLimit(1)
                 .minimumScaleFactor(0.85)
                 .allowsTightening(true)
+                .padding(.bottom, 9)
 
-            HStack(spacing: 12) {
+            HStack(spacing: 14) {
                 Button(action: viewModel.reInit) {
                     Label("Retry", systemImage: "arrow.clockwise")
                         .font(.system(size: 16, weight: .semibold))

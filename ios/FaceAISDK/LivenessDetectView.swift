@@ -151,7 +151,7 @@ struct LivenessDetectView: View {
                                     dismiss()
                                 }
                             }) {
-                                Text("I Know")
+                                Text("Got It")
                                     .font(.system(size: 18).bold())
                                     .foregroundColor(.black)
                                     .frame(maxWidth: .infinity)

@@ -1,30 +1,21 @@
-/* General UI */
 "About us" = "About Us";
-"Add Face By Camera" = "Add Face with Camera";
-"Add Face From Album" = "Add Face from Album";
+"Compare Two Faces" = "Compare Two Faces";
 "Confirm" = "Confirm";
-"Confirm Add Face" = "Confirm Face Registration";
-"Ensure the face is clear and fully visible" = "Ensure the face is clear and fully visible";
+"Confirm & Enroll" = "Confirm & Enroll";
+"Enroll Face By Camera" = "Enroll Face By Camera";
+"Enroll Face From Album" = "Enroll Face From Album";
+"Ensure face is clear and fully visible" = "Ensure  face is clear and fully visible";
 "Face Verify & Liveness" = "Face Verification & Liveness";
-"I Know" = "Got It";
-"Is Face Feature Exist" = "Is Face Feature Exist";
-"ONLY Liveness Detection" = "Liveness Detection Only";
-"Retry" = "Retry";
-"Save Face Feature" = "Save Face Features";
-"Select from album" = "Select from Album";
-"Verify Two Face Similarity" = "Compare Two Faces";
-
-/* Face SDK Tips Codes */
 "Face_Tips_Code_-1" = "SDK Version Too Old";
 "Face_Tips_Code_(code)" = "Unknown Error";
-"Face_Tips_Code_0" = "Look Straight at the Camera";
+"Face_Tips_Code_0" = "Face the Camera";
 "Face_Tips_Code_1" = "No Face Detected";
 "Face_Tips_Code_2" = "Too Many Faces Detected";
 "Face_Tips_Code_3" = "Please Move Closer";
-"Face_Tips_Code_4" = "Keep Your Face Still";
-"Face_Tips_Code_5" = "Keep Your Eyes Open";
-"Face_Tips_Code_6" = "Turn Your Head Right";
-"Face_Tips_Code_7" = "Turn Your Head Left";
+"Face_Tips_Code_4" = "Keep Face Still";
+"Face_Tips_Code_5" = "Keep  Eyes Open";
+"Face_Tips_Code_6" = "Turn  Head Right";
+"Face_Tips_Code_7" = "Turn  Head Left";
 "Face_Tips_Code_8" = "Do Not Tilt Your Head";
 "Face_Tips_Code_9" = "Raise Your Head";
 "Face_Tips_Code_10" = "Lower Your Head";
@@ -48,6 +39,12 @@
 "Face_Tips_Code_53" = "Failed. The light is too bright. Please avoid direct light and use a softly lit indoor environment";
 "Face_Tips_Code_58" = "Too much light. Avoid strong light exposure";
 "Face_Tips_Code_60" = "Avoid strong backlighting and busy backgrounds. Try a different angle or location";
-"Face_Tips_Code_61" = "Liveness Detection Successful";
+"Face_Tips_Code_61" = "Liveness Passed";
 "Face_Tips_Code_62" = "Verification Successful";
 "Face_Tips_Code_63" = "Verification Failed";
+"Got It" = "Got It";
+"Is Face Feature Exist" = "Is Face Feature Exist";
+"Liveness Detection Only" = "Liveness Detection Only";
+"Retry" = "Retry";
+"Save Face Feature" = "Save Face Features";
+"Select from album" = "Select from Album";
