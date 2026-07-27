@@ -51,6 +51,7 @@ const labels = {
     sync: 'Insert Custom Face Feature',
     imageEnroll: 'Enroll with Custom Base64 Image',
     remove: 'Delete Face Feature',
+    email: 'Contact: FaceAISDK.Service@gmail.com',
   },
   zh: {
     title: '人脸识别 API 示例',
@@ -67,6 +68,7 @@ const labels = {
     sync: '传入自定义人脸特征',
     imageEnroll: '传入自定义 Base64 图片录入',
     remove: '删除人脸特征',
+    email: 'email: FaceAISDK.Service@gmail.com',
   },
 } as const;
 
@@ -213,6 +215,8 @@ function App() {
             <Text style={styles.buttonText}>{t(action.labelKey)}</Text>
           </Pressable>
         ))}
+
+        <Text style={styles.footer}>{t('email')}</Text>
       </ScrollView>
     </View>
   );
@@ -266,6 +270,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'center',
+  },
+  footer: {
+    marginTop: 32,
+    color: '#8E8E93',
+    fontSize: 14,
     textAlign: 'center',
   },
 });
