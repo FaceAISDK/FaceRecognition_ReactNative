@@ -1,5 +1,5 @@
 PODS:
-  - FaceAISDK_Core (2026.07.27):
+  - FaceAISDK_Core (2026.07.31):
     - GoogleMLKit/FaceDetection (= 9.0.0)
     - TensorFlowLiteSwift (= 2.17.0)
   - FBLazyVector (0.84.0)
@@ -1450,7 +1450,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
   - react-native-face-sdk (1.2.0):
-    - FaceAISDK_Core (= 2026.07.27)
+    - FaceAISDK_Core (= 2026.07.31)
     - React-Core
   - React-NativeModulesApple (0.84.0):
     - hermes-engine
@@ -1849,7 +1849,7 @@ PODS:
   - Yoga (0.0.0)
 
 DEPENDENCIES:
-  - FaceAISDK_Core (from `https://github.com/FaceAISDK/FaceAISDK_Core.git`, tag `2026.07.27`)
+  - FaceAISDK_Core (from `https://github.com/FaceAISDK/FaceAISDK_Core.git`, tag `2026.07.31`)
   - FBLazyVector (from `../../node_modules/react-native/Libraries/FBLazyVector`)
   - hermes-engine (from `../../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - RCTDeprecation (from `../../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -1945,7 +1945,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   FaceAISDK_Core:
     :git: https://github.com/FaceAISDK/FaceAISDK_Core.git
-    :tag: 2026.07.27
+    :tag: 2026.07.31
   FBLazyVector:
     :path: "../../node_modules/react-native/Libraries/FBLazyVector"
   hermes-engine:
@@ -2099,10 +2099,10 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   FaceAISDK_Core:
     :git: https://github.com/FaceAISDK/FaceAISDK_Core.git
-    :tag: 2026.07.27
+    :tag: 2026.07.31
 
 SPEC CHECKSUMS:
-  FaceAISDK_Core: 11f509c68435d2a2de80203bfdd5ac5190bf4193
+  FaceAISDK_Core: 9ee08b4df43d15fda15a08d7127fe5ca85032979
   FBLazyVector: c12d2108050e27952983d565a232f6f7b1ad5e69
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleMLKit: b1eee21a41c57704fe72483b15c85cb2c0cd7444
@@ -2152,7 +2152,7 @@ SPEC CHECKSUMS:
   React-logger: 9e51e01455f15cb3ef87a09a1ec773cdb22d56c1
   React-Mapbuffer: 92b99e450e8ff598b27d6e4db3a75e04fd45e9a9
   React-microtasksnativemodule: 2fe0f2bd2840dedbd66c0ac249c64f977f39cc18
-  react-native-face-sdk: 3cfaed9d1d4d0d5a583886e4472bfe80ffdb4b3f
+  react-native-face-sdk: 97464e427a424cf2b627a934dd94b500e279ec0d
   React-NativeModulesApple: 44a9474594566cd03659f92e38f42599c6b9dee4
   React-networking: db73d91466cb134fcbdaaa579fb2de14e2c2ea01
   React-oscompat: b924b8609d06899f00ab1aa813b0cde9c5e12771
@@ -2191,6 +2191,6 @@ SPEC CHECKSUMS:
   TensorFlowLiteSwift: 723fe42222815e72490c79feeff05305530de393
   Yoga: 772166513f9cd2d61a6251d0dacbbfaa5b537479
 
-PODFILE CHECKSUM: 1e97facf3dc20da85e1103a7c0de0d9396e16a85
+PODFILE CHECKSUM: b282afdfc00f1bfda574af8ec8c4173467d1d675
 
 COCOAPODS: 1.16.2
