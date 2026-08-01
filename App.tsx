@@ -24,6 +24,8 @@ import {
   type FaceResult,
 } from '@faceaisdk/react-native-face-sdk';
 
+//Silent liveness threshold (iOS/Android): 0.85–0.95. Actual performance varies with camera and lighting—adjust based on scenario.
+//iOS Android 静默活体通过阈值范围0.85到0.95，注意实际表现和摄像头&环境有关
 const DEMO_FACE_ID = 'demo-user';
 const DEMO_FACE_FEATURE = '0'.repeat(1024);
 const DEMO_BASE64_IMAGE = 'demo_base64_image_string';

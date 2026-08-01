@@ -72,7 +72,7 @@ npm run ios
 ## 在其他项目中安装 SDK
 
 ```bash
-npm install @faceaisdk/react-native-face-sdk
+npm install @faceaisdk/react-native-face-sdk latest
 ```
 
 ### iOS 配置
