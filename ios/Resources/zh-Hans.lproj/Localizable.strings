@@ -1,11 +1,22 @@
+/* 通用与操作 */
 "About us" = "关于我们";
 "Compare Two Faces" = "人脸图相似对比";
 "Confirm" = "确认";
 "Confirm & Enroll" = "确认人脸录入";
+"Got It" = "知道了";
+"Retry" = "重试";
+"Select from album" = "从相册选择";
+
+/* 功能与采集 */
 "Enroll Face By Camera" = "通过相机录入人脸";
 "Enroll Face From Album" = "从相册图片录入人脸";
-"Ensure face is clear and fully visible" = "请确保人脸清晰、完整且无遮挡";
+"Ensure face is clear and fully visible" = "确保人脸清晰、完整且无遮挡";
 "Face Verify & Liveness" = "人脸识别+活体检测";
+"Is Face Feature Exist" = "人脸特征值是否存在";
+"Liveness Detection Only" = "仅仅活体检测";
+"Save Face Feature" = "保存人脸特征";
+
+/* 人脸 SDK 状态码与动作提示 */
 "Face_Tips_Code_-1" = "SDK Version Too Old";
 "Face_Tips_Code_(code)" = "根据Code完善文案";
 "Face_Tips_Code_0" = "请正对摄像头";
@@ -36,15 +47,9 @@
 "Face_Tips_Code_50" = "请靠近,屏幕即将闪烁";
 "Face_Tips_Code_51" = "炫彩活体成功";
 "Face_Tips_Code_52" = "炫彩活体失败";
-"Face_Tips_Code_53" = "炫彩活体检测失败,光线亮度过高;如图遮挡高亮光源或室内光线柔和环境使用";
+"Face_Tips_Code_53" = "炫彩活体检测失败,光线亮度过高;请室内光线柔和环境使用";
 "Face_Tips_Code_58" = "光线过强,避免强光照射";
-"Face_Tips_Code_60" = "请避开强逆光与杂乱背景，换个角度或地方重试";
+"Face_Tips_Code_60" = "活体检测识别";
 "Face_Tips_Code_61" = "活体检测完成";
 "Face_Tips_Code_62" = "识别成功";
-"Face_Tips_Code_63" = "识别失败,相似度低";
-"Got It" = "知道了";
-"Is Face Feature Exist" = "人脸特征值是否存在";
-"Liveness Detection Only" = "仅仅活体检测";
-"Retry" = "重试";
-"Save Face Feature" = "保存人脸特征";
-"Select from album" = "从相册选择";
+"Face_Tips_Code_63" = "识别失败";
