@@ -70,7 +70,7 @@ const labels = {
     sync: '传入自定义人脸特征',
     imageEnroll: '传入自定义 Base64 图片录入',
     remove: '删除人脸特征',
-    email: 'email: FaceAISDK.Service@gmail.com',
+    email: 'Email: FaceAISDK.Service@gmail.com',
   },
 } as const;
 
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1677FF',
     borderRadius: 10,
     marginBottom: 12,
-    paddingVertical: 14,
+    paddingVertical: 13,
   },
   buttonPressed: {
     opacity: 0.75,
