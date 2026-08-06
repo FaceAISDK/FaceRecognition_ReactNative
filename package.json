@@ -4,7 +4,7 @@
   "description": "React Native offline face enrollment, verification, and liveness detection SDK.",
   "license": "FaceAISDK License",
   "author": "FaceAISDK.Service@gmail.com",
-  "homepage": "https://faceaisdk.github.io/index/",
+  "homepage": "https://faceaisdk.github.io/index",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FaceAISDK/FaceRecognition_ReactNative.git"
