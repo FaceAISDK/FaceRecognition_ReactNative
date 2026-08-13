@@ -28,6 +28,7 @@
     "android/build.gradle",
     "android/proguard-rules.pro",
     "scripts/faceaisdk_post_install.rb",
+    "scripts/npm-cli.sh",
     "react-native-face-sdk.podspec",
     "README.md",
     "LICENSE"
@@ -36,8 +37,8 @@
     "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf lib",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
-    "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm run typecheck && npm run lint && npm test",
+    "prepare": "bash ./scripts/npm-cli.sh run clean && bash ./scripts/npm-cli.sh run build",
+    "prepublishOnly": "bash ./scripts/npm-cli.sh run typecheck && bash ./scripts/npm-cli.sh run lint && bash ./scripts/npm-cli.sh test",
     "test": "jest --runInBand",
     "lint": "eslint src __tests__",
     "pack": "bash ./scripts/npm-cli.sh pack .",

@@ -37,6 +37,7 @@ REQUIRED=(
   "package/ios/Resources/en.lproj/Localizable.strings"
   "package/ios/Resources/zh-Hans.lproj/Localizable.strings"
   "package/scripts/faceaisdk_post_install.rb"
+  "package/scripts/npm-cli.sh"
 )
 
 MISSING=0
