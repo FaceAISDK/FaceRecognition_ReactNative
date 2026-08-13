@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
   }
 
   s.dependency 'React-Core'
-  s.dependency 'FaceAISDK_Core', '2026.08.01'
+  s.dependency 'FaceAISDK_Core', '2026.08.11'
 end

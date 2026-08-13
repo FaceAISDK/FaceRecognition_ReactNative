@@ -45,23 +45,65 @@ find_android_device() {
   adb devices | awk 'NR > 1 && $2 == "device" { print $1; exit }'
 }
 
+metro_bundle_ok() {
+  local platform="$1"
+  local url="http://127.0.0.1:8081/index.bundle?platform=$platform&dev=true&minify=false&modulesOnly=false&runModule=true"
+  local code
+
+  code="$(curl -sS --max-time 60 -o /tmp/facern-metro-probe.log -w '%{http_code}' "$url" || true)"
+  [ "$code" = 200 ]
+}
+
+stop_project_metro() {
+  local pid
+  local cwd
+
+  pid="$(lsof -tiTCP:8081 -sTCP:LISTEN | sed -n '1p')"
+  [ -n "$pid" ] || return 0
+  cwd="$(lsof -a -p "$pid" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p')"
+  if [ "$cwd" != "$EXAMPLE_DIR" ]; then
+    echo "❌ 端口 8081 被其他项目占用: ${cwd:-未知目录}"
+    return 1
+  fi
+
+  kill "$pid"
+  for _ in {1..10}; do
+    if ! lsof -iTCP:8081 -sTCP:LISTEN > /dev/null 2>&1; then
+      return 0
+    fi
+    sleep 1
+  done
+  echo "❌ 无法停止旧的 Metro 进程: $pid"
+  return 1
+}
+
 ensure_metro() {
+  local platform="$1"
+
   if lsof -iTCP:8081 -sTCP:LISTEN > /dev/null 2>&1; then
-    echo "✅ 复用已运行的 Metro"
-    return
+    if metro_bundle_ok "$platform"; then
+      echo "✅ 复用已运行的 Metro"
+      return
+    fi
+    echo "♻️  Metro bundle 异常，正在重置缓存并重启..."
+    stop_project_metro
   fi
 
   echo "▶️  启动 Metro..."
   nohup node "$REPO_DIR/node_modules/react-native/cli.js" start \
     --config "$EXAMPLE_DIR/metro.config.js" \
+    --reset-cache \
     > /tmp/facern-metro.log 2>&1 &
 
-  for _ in {1..10}; do
-    lsof -iTCP:8081 -sTCP:LISTEN > /dev/null 2>&1 && return
+  for _ in {1..20}; do
+    if lsof -iTCP:8081 -sTCP:LISTEN > /dev/null 2>&1; then
+      metro_bundle_ok "$platform" && return
+      break
+    fi
     sleep 1
   done
 
-  echo "❌ Metro 启动失败，请查看 /tmp/facern-metro.log"
+  echo "❌ Metro 启动或打包失败，请查看 /tmp/facern-metro.log 和 /tmp/facern-metro-probe.log"
   return 1
 }
 
@@ -144,7 +186,7 @@ run_android() {
   echo "🤖 构建并安装到 Android 设备 $device"
   adb reverse tcp:8081 tcp:8081
   node "$REPO_DIR/node_modules/react-native/cli.js" run-android \
-    --deviceId "$device" --no-packager
+    --device "$device" --no-packager
 }
 
 case "$PLATFORM" in
@@ -171,7 +213,11 @@ if [ "$PLATFORM" = auto ] && [ -z "$IOS_DEVICE" ] && [ -z "$ANDROID_DEVICE" ]; t
   exit 1
 fi
 
-ensure_metro
+METRO_PLATFORM=ios
+if [ "$PLATFORM" = android ] || [ -n "$ANDROID_DEVICE" ]; then
+  METRO_PLATFORM=android
+fi
+ensure_metro "$METRO_PLATFORM"
 
 if [ "$PLATFORM" != android ] && [ -n "$IOS_DEVICE" ]; then
   run_ios "$IOS_DEVICE"

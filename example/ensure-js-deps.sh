@@ -20,14 +20,28 @@ SDK_LINK="$SDK_SCOPE_DIR/react-native-face-sdk"
 LAYOUT_CHANGED=0
 
 ensure_repo_dependencies() {
+  local virtualized_lists="$REPO_DIR/node_modules/@react-native/virtualized-lists"
+
   if [ -e "$REPO_DIR/node_modules/react-native/package.json" ] \
      && [ -e "$REPO_DIR/node_modules/metro/package.json" ] \
-     && [ -e "$REPO_DIR/node_modules/react/package.json" ]; then
+     && [ -e "$REPO_DIR/node_modules/react/package.json" ] \
+     && [ -e "$virtualized_lists/index.js" ]; then
     return 0
+  fi
+
+  # npm 被中断时可能只留下 package.json，Metro 随后会持续缓存“入口不存在”。
+  if [ -e "$virtualized_lists/package.json" ] && [ ! -e "$virtualized_lists/index.js" ]; then
+    echo "🧹 检测到不完整的 @react-native/virtualized-lists，正在重新安装..."
+    rm -rf "$virtualized_lists"
   fi
 
   echo "📦 仓库根目录依赖缺失，正在执行 npm install（含 react-native / metro 等）..."
   npm install --prefix "$REPO_DIR" --no-fund --no-audit
+
+  if [ ! -e "$virtualized_lists/index.js" ]; then
+    echo "❌ @react-native/virtualized-lists 安装不完整，请检查 npm install 输出。"
+    exit 1
+  fi
   echo "✅ 仓库根目录依赖已就绪。"
 }
 
@@ -92,5 +106,4 @@ verify_sdk_resolves
 print_sdk_source
 
 echo "✅ Example JavaScript 依赖已就绪（复用仓库根目录 node_modules + 本地 SDK 软链）。"
-
 
