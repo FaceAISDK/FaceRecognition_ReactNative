@@ -1,6 +1,6 @@
 {
   "name": "faceaisdk-react-native-demo",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android --port 8765",
@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@faceaisdk/react-native-face-sdk": "^1.6.0",
+    "@faceaisdk/react-native-face-sdk": "^1.7.0",
     "latest": "^0.2.0",
     "react": "19.2.3",
     "react-native": "0.84.0"
