@@ -1,7 +1,7 @@
 {
   "name": "face-sdk-example",
   "private": true,
-  "version": "1.7.0",
+  "version": "1.7.1",
   "scripts": {
     "ensure:deps": "bash ./ensure-js-deps.sh",
     "prestart": "npm run ensure:deps",
@@ -21,4 +21,3 @@
     "react-native-safe-area-context": "^5.5.2"
   }
 }
-
