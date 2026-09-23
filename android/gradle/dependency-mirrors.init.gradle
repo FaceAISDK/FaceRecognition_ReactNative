@@ -1,0 +1,18 @@
+// Apply repository mirrors to every Gradle build, including React Native's
+// included Gradle plugin build under node_modules. Repositories declared only
+// in android/build.gradle do not propagate into that included build.
+allprojects {
+    buildscript {
+        repositories {
+            maven { url = uri('https://maven.aliyun.com/repository/google') }
+            google()
+            mavenCentral()
+        }
+    }
+
+    repositories {
+        maven { url = uri('https://maven.aliyun.com/repository/google') }
+        google()
+        mavenCentral()
+    }
+}

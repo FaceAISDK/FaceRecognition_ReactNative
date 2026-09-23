@@ -1,5 +1,5 @@
 PODS:
-  - FaceAISDK_Core (2026.08.11):
+  - FaceAISDK_Core (2026.09.22):
     - GoogleMLKit/FaceDetection (= 9.0.0)
     - TensorFlowLiteSwift (= 2.17.0)
   - FBLazyVector (0.84.0)
@@ -16,13 +16,13 @@ PODS:
     - GoogleToolboxForMac/Defines (= 4.2.1)
   - "GoogleToolboxForMac/NSData+zlib (4.2.1)":
     - GoogleToolboxForMac/Defines (= 4.2.1)
-  - GoogleUtilities/Environment (8.1.2):
+  - GoogleUtilities/Environment (8.1.3):
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Logger (8.1.2):
+  - GoogleUtilities/Logger (8.1.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (8.1.2)
-  - GoogleUtilities/UserDefaults (8.1.2):
+  - GoogleUtilities/Privacy (8.1.3)
+  - GoogleUtilities/UserDefaults (8.1.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (3.5.0)
@@ -1449,8 +1449,8 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-face-sdk (1.6.0):
-    - FaceAISDK_Core (= 2026.08.11)
+  - react-native-face-sdk (1.7.1):
+    - FaceAISDK_Core (= 2026.09.22)
     - React-Core
   - React-NativeModulesApple (0.84.0):
     - hermes-engine
@@ -2094,12 +2094,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  FaceAISDK_Core: e01ff7e1d99e7085032be4f12bb9e19f34e5009a
+  FaceAISDK_Core: 5fd797882c8050e597d5ba5093bb015a6a643305
   FBLazyVector: c12d2108050e27952983d565a232f6f7b1ad5e69
   GoogleDataTransport: a24e58982ab3ba2f64d79613e027fe7f57e88539
   GoogleMLKit: b1eee21a41c57704fe72483b15c85cb2c0cd7444
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
-  GoogleUtilities: 766ace00c6b10d8148408f329d10c4f051931850
+  GoogleUtilities: 4e0c2ad9fa0d0d18b5c4df8bf57b461cba35b0bb
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   hermes-engine: 8c89885d3e9740bf602aa84510396fef8dd6cd91
   MLImage: 0de5c6c2bf9e93b80ef752e2797f0836f03b58c0
@@ -2144,7 +2144,7 @@ SPEC CHECKSUMS:
   React-logger: 9e51e01455f15cb3ef87a09a1ec773cdb22d56c1
   React-Mapbuffer: 92b99e450e8ff598b27d6e4db3a75e04fd45e9a9
   React-microtasksnativemodule: 2fe0f2bd2840dedbd66c0ac249c64f977f39cc18
-  react-native-face-sdk: a20f472cc6a84a12332c1dc0276835b907b04a75
+  react-native-face-sdk: 83b87145dff3efe3b657994be2ed6d9d6ebc5db7
   React-NativeModulesApple: 44a9474594566cd03659f92e38f42599c6b9dee4
   React-networking: db73d91466cb134fcbdaaa579fb2de14e2c2ea01
   React-oscompat: b924b8609d06899f00ab1aa813b0cde9c5e12771
