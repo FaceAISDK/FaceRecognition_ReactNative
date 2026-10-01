@@ -50,6 +50,21 @@ npm run ios
 Debug 调试时，iPhone 需要能访问电脑的 Metro 8765 端口。
 若 CLI 的 `devicectl` 安装失败，请在 Xcode 选择已连接的真机，使用 **Product > Run**。
 
+#### iOS 16 及更早版本
+
+使用 `ios-deploy` 安装调试，不经过 `devicectl`。连接并解锁一台 iPhone，信任电脑，
+然后在项目根目录运行：
+
+```bash
+npm run ios:legacy
+```
+
+命令构建并安装 Release 包，完成后点击手机上的应用图标启动，无需 Metro。
+构建文件缓存在 `ios/build`，不会删除已有 Pods 或构建缓存。
+CLI 版本和原来的 `npm run ios` 保持不变。
+默认精简输出；完整日志保存在 `ios/build/ios-legacy.log`（每次运行覆盖），
+构建或安装失败时自动显示完整日志。
+
 ## 演示 API
 
 完整调用见 [App.tsx](./App.tsx)。从 `@faceaisdk/react-native-face-sdk` 导入 API；

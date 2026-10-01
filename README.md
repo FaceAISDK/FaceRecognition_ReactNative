@@ -51,6 +51,21 @@ For Debug builds, the iPhone must be able to reach Metro on your computer's port
 If CLI installation fails with `devicectl`, select the connected device in Xcode
 and use **Product > Run** instead.
 
+#### iOS 16 and Earlier
+
+Use `ios-deploy` instead of `devicectl`. Connect and unlock one iPhone, trust the
+computer, then run from the project root:
+
+```bash
+npm run ios:legacy
+```
+
+This builds a Release app and installs it; tap the app icon to launch. Metro is
+not needed. Build files are cached in `ios/build`; existing Pods and build caches
+are not deleted. The CLI version and `npm run ios` remain unchanged.
+Output is brief; the full log is saved to `ios/build/ios-legacy.log` (replaced
+each run) and printed automatically if building or installation fails.
+
 ## Demo APIs
 
 See [App.tsx](./App.tsx) for the complete example. Import APIs from

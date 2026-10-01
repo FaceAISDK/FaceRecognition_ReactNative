@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android --port 8765 --extra-params=\"--init-script gradle/dependency-mirrors.init.gradle\"",
     "ios": "react-native run-ios --device --port 8765",
+    "ios:legacy": "sh scripts/ios-legacy.sh",
     "lint": "eslint App.tsx __tests__",
     "start": "react-native start --port 8765",
     "test": "jest --runInBand",
