@@ -24,11 +24,12 @@ import {
   type FaceResult,
 } from '@faceaisdk/react-native-face-sdk';
 
-//Silent liveness threshold (iOS/Android): 0.85–0.95. Actual performance varies with camera and lighting—adjust based on scenario.
-//iOS Android 静默活体通过阈值范围0.85到0.95，注意实际表现和摄像头&环境有关
+// Reuse this ID for enrollment, verification, lookup, and deletion.
 const DEMO_FACE_ID = 'demo-user';
-const DEMO_FACE_FEATURE = '0'.repeat(1024);
-const DEMO_BASE64_IMAGE = 'demo_base64_image_string';
+// Set real data to enable these APIs; inserting a feature overwrites this ID.
+const DEMO_FACE_FEATURE = '';
+const DEMO_BASE64_IMAGE = '';
+// Shared settings for face verification and standalone liveness detection.
 const LIVENESS_OPTIONS = {
   livenessType: 1 as const,
   motionTypes: '1,2,3,4,5',
@@ -40,37 +41,39 @@ const LIVENESS_OPTIONS = {
 const labels = {
   en: {
     title: 'Face Recognition API Demo',
-    subtitle: 'Explore face enrollment, verification, and liveness.',
-    disconnected: 'SDK Not Connected',
-    permissionError: 'Permission Error',
+    subtitle: 'Face enrollment, verification, and liveness detection',
+    disconnected: 'SDK unavailable',
+    permissionError: 'Camera permission required',
     cameraDenied: 'Camera permission is required for this feature.',
-    failed: 'Failed',
+    failed: 'failed',
     unknownError: 'Unknown error',
-    enroll: 'Enroll Face via Camera',
-    verify: 'Face Verify + Liveness',
-    liveness: 'Liveness Detection',
-    query: 'Query Face Feature',
-    sync: 'Insert Custom Face Feature',
-    imageEnroll: 'Enroll with Custom Base64 Image',
-    remove: 'Delete Face Feature',
-    email: 'Contact: FaceAISDK.Service@gmail.com',
+    dataRequired: 'Set valid demo data in App.tsx before using this API.',
+    enroll: 'Enroll face with camera',
+    verify: 'Face verification + liveness',
+    liveness: 'Liveness detection',
+    query: 'Query face feature',
+    sync: 'Insert custom face feature',
+    imageEnroll: 'Enroll face from Base64 image',
+    remove: 'Delete face feature',
+    email: 'Email: FaceAISDK.Service@gmail.com',
   },
   zh: {
     title: '人脸识别 API 示例',
     subtitle: '体验人脸录入、比对与活体检测',
-    disconnected: 'SDK 未连接',
-    permissionError: '权限错误',
+    disconnected: 'SDK 不可用',
+    permissionError: '需要相机权限',
     cameraDenied: '需要相机权限才能使用此功能',
     failed: '失败',
     unknownError: '未知错误',
+    dataRequired: '请先在 App.tsx 中配置真实演示数据。',
     enroll: '相机录入人脸',
     verify: '人脸比对 + 活体检测',
     liveness: '活体检测',
     query: '查询人脸特征',
     sync: '传入自定义人脸特征',
-    imageEnroll: '传入自定义 Base64 图片录入',
+    imageEnroll: 'Base64图片录入人脸',
     remove: '删除人脸特征',
-    email: 'Email: FaceAISDK.Service@gmail.com',
+    email: '邮箱：FaceAISDK.Service@gmail.com',
   },
 } as const;
 
@@ -80,6 +83,7 @@ type LabelKey = keyof (typeof labels)['en'];
 type DemoAction = {
   labelKey: LabelKey;
   needsCamera?: boolean;
+  input?: string;
   run: () => Promise<FaceResult>;
 };
 
@@ -125,10 +129,12 @@ const actions: DemoAction[] = [
   },
   {
     labelKey: 'sync',
+    input: DEMO_FACE_FEATURE,
     run: () => insertFaceFeature(DEMO_FACE_ID, DEMO_FACE_FEATURE),
   },
   {
     labelKey: 'imageEnroll',
+    input: DEMO_BASE64_IMAGE,
     run: () => addFaceByImage(DEMO_FACE_ID, DEMO_BASE64_IMAGE),
   },
   {
@@ -138,6 +144,7 @@ const actions: DemoAction[] = [
 ];
 
 async function requestCameraPermission() {
+  // The native SDK handles camera permission on iOS.
   if (Platform.OS !== 'android') {
     return true;
   }
@@ -150,6 +157,7 @@ async function requestCameraPermission() {
 }
 
 function formatResult(result: FaceResult) {
+  // Show lengths only: feature strings and Base64 images can be large.
   return [
     `code: ${result.code}`,
     `message: ${result.message}`,
@@ -162,17 +170,25 @@ function formatResult(result: FaceResult) {
 }
 
 function App() {
+  // Module availability checks native linking, not the outcome of an SDK call.
   const pluginReady = isFaceAIModuleAvailable();
 
   const runDemo = async (action: DemoAction) => {
     const title = t(action.labelKey);
 
     try {
+      // Unconfigured imports must not overwrite a face already enrolled by camera.
+      if (action.input !== undefined && !action.input.trim()) {
+        Alert.alert(title, t('dataRequired'));
+        return;
+      }
+
       if (action.needsCamera && !(await requestCameraPermission())) {
         Alert.alert(t('permissionError'), t('cameraDenied'));
         return;
       }
 
+      // SDK business failures are returned in code/message, not necessarily thrown.
       const result = await action.run();
       Alert.alert(title, formatResult(result));
     } catch (error) {
@@ -213,24 +229,14 @@ function App() {
             onPress={() => runDemo(action)}
             style={({pressed}) => [
               styles.button,
-              index === 0 && styles.primaryButton,
               pressed && styles.buttonPressed,
               !pluginReady && styles.buttonDisabled,
             ]}>
-            <Text style={[styles.number, index === 0 && styles.primaryNumber]}>
+            <Text style={styles.number}>
               {String(index + 1).padStart(2, '0')}
             </Text>
-            <Text
-              style={[
-                styles.buttonText,
-                index === 0 && styles.primaryText,
-                action.labelKey === 'remove' && styles.dangerText,
-              ]}>
-              {t(action.labelKey)}
-            </Text>
-            <Text style={[styles.arrow, index === 0 && styles.primaryText]}>
-              ›
-            </Text>
+            <Text style={styles.buttonText}>{t(action.labelKey)}</Text>
+            <Text style={styles.arrow}>›</Text>
           </Pressable>
         ))}
 
@@ -265,9 +271,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#17243B',
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '700',
-    lineHeight: 36,
+    lineHeight: 30,
     marginBottom: 8,
   },
   subtitle: {
@@ -294,10 +300,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  primaryButton: {
-    backgroundColor: '#2563EB',
-    borderColor: '#2563EB',
-  },
   buttonPressed: {
     opacity: 0.7,
   },
@@ -322,16 +324,6 @@ const styles = StyleSheet.create({
     width: 32,
     marginRight: 14,
     textAlign: 'center',
-  },
-  primaryNumber: {
-    color: '#FFFFFF',
-    backgroundColor: '#FFFFFF26',
-  },
-  primaryText: {
-    color: '#FFFFFF',
-  },
-  dangerText: {
-    color: '#B42318',
   },
   arrow: {
     color: '#94A3B8',

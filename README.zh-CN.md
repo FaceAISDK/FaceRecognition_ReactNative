@@ -1,49 +1,30 @@
-# FaceAISDK人脸识别活体检测React Native 示例
+# FaceAISDK React Native 示例
 
 [English](./README.md) | [中文](./README.zh-CN.md)
 
-本仓库是
-[`@faceaisdk/react-native-face-sdk`](https://www.npmjs.com/package/@faceaisdk/react-native-face-sdk)
-的 React Native API示例，演示 iOS 和 Android 端的离线人脸录入、1:1 比对、
-活体检测和人脸特征管理。
-
-> SDK 依赖设备相机和原生人脸算法，必须使用真机；不支持模拟器。
-
-## 功能
-
-- 使用 SDK 相机离线录入人脸
-- 人脸 1:1 比对与活体检测
-- 独立活体检测
-- 查询、写入和删除人脸特征
-- 传入自定义 Base64 图片录入人脸
+使用 [`@faceaisdk/react-native-face-sdk`](https://www.npmjs.com/package/@faceaisdk/react-native-face-sdk)
+演示 iOS / Android 离线人脸录入、比对、活体检测和特征管理。
 
 ## 环境要求
 
-| 项目         | 要求                                                       |
-| ------------ | ---------------------------------------------------------- |
-| Node.js      | 22.11 或更高版本                                           |
-| React Native | 本示例使用 0.84.0                                          |
-| Face SDK     | 本示例使用 `^1.1.0`                                        |
-| iOS          | 15.0 或更高版本，必须使用真机                              |
-| Android      | `minSdkVersion` 24+、`compileSdkVersion` 34+，必须使用真机 |
+- Node.js 22.11+、React Native 0.84.0、CLI 20.2.0、Face SDK 1.7.1（iOS Core 2026.09.22）。
+- iOS 15.5+ 或 Android API 24+ 真机；不支持模拟器。
+- iOS 需要 Xcode 和 CocoaPods；Android 需要 Android SDK（compile SDK 34）和 JDK 17。
 
-## 运行本示例
+## 运行
 
-安装 JavaScript 依赖：
+安装依赖并启动 Metro（端口 8765）：
 
 ```bash
 npm install
-```
-
-### Android
-
-在一个终端中启动 Metro：
-
-```bash
 npm start
 ```
 
-连接已开启 USB 调试的 Android 真机，然后在另一个终端运行：
+保持 Metro 运行，在另一个终端执行以下命令。
+
+### Android
+
+连接已开启 USB 调试的真机：
 
 ```bash
 npm run android
@@ -51,7 +32,7 @@ npm run android
 
 ### iOS
 
-安装 CocoaPods 依赖：
+安装 Pods：
 
 ```bash
 cd ios
@@ -59,184 +40,51 @@ pod install
 cd ..
 ```
 
-使用 Xcode 打开 `ios/FaceAISDK_RN.xcworkspace`，然后在
-**Signing & Capabilities** 中选择 Development Team。
-
-分别在两个终端中启动 Metro 和应用：
+用 Xcode 打开 `ios/FaceAISDK_RN.xcworkspace`，在 **Signing & Capabilities**
+中选择自己的 Development Team。连接 iPhone 后运行：
 
 ```bash
-npm start
 npm run ios
 ```
 
-## 在其他项目中安装 SDK
+Debug 调试时，iPhone 需要能访问电脑的 Metro 8765 端口。
+若 CLI 的 `devicectl` 安装失败，请在 Xcode 选择已连接的真机，使用 **Product > Run**。
 
-```bash
-npm install @faceaisdk/react-native-face-sdk latest
-```
+## 演示 API
 
-### iOS 配置
-
-在 `ios/Podfile` 顶部附近加载 SDK 的 post-install 脚本：
-
-```ruby
-require_relative '../node_modules/@faceaisdk/react-native-face-sdk/scripts/faceaisdk_post_install.rb'
-```
-
-在 React Native 的 post-install 步骤之后调用该脚本：
-
-```ruby
-post_install do |installer|
-  react_native_post_install(
-    installer,
-    config[:reactNativePath],
-    :mac_catalyst_enabled => false
-  )
-  faceaisdk_post_install(installer)
-end
-```
-
-安装 Pods：
-
-```bash
-cd ios && pod install
-```
-
-在 `Info.plist` 中添加相机权限说明：
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>人脸识别和活体检测需要使用相机。</string>
-```
-
-### Android 配置
-
-确保 Android 工程至少使用：
-
-```gradle
-minSdkVersion = 24
-compileSdkVersion = 34
-```
-
-在 `android/app/src/main/AndroidManifest.xml` 中声明相机权限：
-
-```xml
-<uses-permission android:name="android.permission.CAMERA" />
-```
-
-Android 还必须在运行时请求相机权限。完整的 `PermissionsAndroid` 示例请参考
-[`App.tsx`](./App.tsx)。
-
-## 导入
+完整调用见 [App.tsx](./App.tsx)。从 `@faceaisdk/react-native-face-sdk` 导入 API；
+下表中的调用均返回 `Promise<FaceResult>`。
 
 ```ts
-import {
-  addFaceByImage,
-  addFaceBySDKCamera,
-  deleteFaceFeature,
-  faceVerify,
-  getFaceFeature,
-  insertFaceFeature,
-  isFaceAIModuleAvailable,
-  livenessVerify,
-  type FaceResult,
-} from '@faceaisdk/react-native-face-sdk';
-```
-
-## API 示例
-
-### 检查原生模块是否可用
-
-```ts
-const available = isFaceAIModuleAvailable();
-```
-
-调用其他 API 前，可以使用此方法发现原生安装或链接是否完整。
-
-### 使用 SDK 相机录入人脸
-
-```ts
-const result = await addFaceBySDKCamera('demo-user', {
-  mode: 1,
-  showConfirm: true,
-});
-```
-
-| 参数          | 类型      | 说明             |
-| ------------- | --------- | ---------------- |
-| `mode`        | `1 \| 2`  | 相机录入模式     |
-| `showConfirm` | `boolean` | 是否显示确认步骤 |
-
-### 人脸比对与活体检测
-
-```ts
-const result = await faceVerify('demo-user', {
-  threshold: 0.83,
-  livenessType: 1,
+const faceID = 'demo-user';
+const options = {
+  livenessType: 1 as const,
   motionTypes: '1,2,3,4,5',
   timeout: 7,
   steps: 2,
   allowMultiFaces: true,
-});
+};
 ```
 
-### 独立活体检测
+| 菜单                | API 调用                                                   |
+| ------------------- | ---------------------------------------------------------- |
+| 相机录入人脸        | `addFaceBySDKCamera(faceID, {mode: 1, showConfirm: true})` |
+| 人脸比对 + 活体检测 | `faceVerify(faceID, options)`                              |
+| 活体检测            | `livenessVerify(options)`                                  |
+| 查询人脸特征        | `getFaceFeature(faceID)`                                   |
+| 传入自定义人脸特征  | `insertFaceFeature(faceID, feature)`                       |
+| Base64 图片录入人脸 | `addFaceByImage(faceID, base64Image)`                      |
+| 删除人脸特征        | `deleteFaceFeature(faceID)`                                |
 
-```ts
-const result = await livenessVerify({
-  livenessType: 1,
-  motionTypes: '1,2,3,4,5',
-  timeout: 7,
-  steps: 2,
-  allowMultiFaces: true,
-});
-```
-
-`faceVerify` 和 `livenessVerify` 共用以下活体参数：
-
-| 参数              | 类型               | 说明                       |
-| ----------------- | ------------------ | -------------------------- |
-| `livenessType`    | `1 \| 2 \| 3 \| 4` | 活体检测模式               |
-| `motionTypes`     | `string`           | 使用逗号分隔的动作类型 ID  |
-| `timeout`         | `number`           | 活体检测超时参数           |
-| `steps`           | `number`           | 活体检测步骤数量           |
-| `allowMultiFaces` | `boolean`          | 是否允许画面中出现多张人脸 |
-
-`faceVerify` 还支持 `threshold`，用于设置人脸相似度阈值。
-
-### 查询人脸特征
-
-```ts
-const result = await getFaceFeature('demo-user');
-```
-
-### 写入自定义人脸特征
-
-```ts
-const customFeature = '0'.repeat(1024);
-const result = await insertFaceFeature('demo-user', customFeature);
-```
-
-这里的占位值用于演示如何传入自定义特征。需要成功执行时，请替换为有效的人脸特征。
-
-### 使用自定义 Base64 图片录入
-
-```ts
-const customBase64Image = 'demo_base64_image_string';
-const result = await addFaceByImage('demo-user', customBase64Image);
-```
-
-请将占位值替换为有效的 Base64 图片。
-
-### 删除人脸特征
-
-```ts
-const result = await deleteFaceFeature('demo-user');
-```
+- 先录入，再比对或查询；独立活体检测无需录入。
+- `App.tsx` 的 `DEMO_FACE_FEATURE` 和 `DEMO_BASE64_IMAGE` 默认为空；
+  未配置时点击菜单只显示提示，不调用 SDK。使用前请填入真实 SDK 特征和有效
+  Base64 图片。写入特征会覆盖同一人脸 ID 的已有数据。
+- `motionTypes` 是逗号分隔的动作 ID；`timeout`、`steps`、`allowMultiFaces`
+  分别控制超时、动作数量和多脸处理。`faceVerify` 还支持 `threshold`（默认 `0.83`），
+  这是人脸相似度阈值，不是活体阈值。
 
 ## 返回结果
-
-所有异步 API 都返回 `FaceResult`：
 
 ```ts
 interface FaceResult {
@@ -250,41 +98,65 @@ interface FaceResult {
 }
 ```
 
-| 属性          | 类型     | 说明            |
-| ------------- | -------- | --------------- |
-| `code`        | `number` | SDK 返回码      |
-| `message`     | `string` | SDK 返回信息    |
-| `faceID`      | `string` | 人脸标识        |
-| `similarity`  | `number` | 人脸相似度      |
-| `liveness`    | `number` | 活体检测分值    |
-| `faceFeature` | `string` | 人脸特征数据    |
-| `faceBase64`  | `string` | Base64 人脸图片 |
+检查 `code` 和 `message` 判断业务结果；SDK 业务失败不一定抛出异常。
+为避免弹窗内容过长，示例只展示特征和图片字符串的长度。
 
-SDK 提示文本可以直接使用 `message`。为了避免弹窗中出现过长内容，示例只展示
-人脸特征和 Base64 图片的长度。
+## 接入其他项目
+
+```bash
+npm install @faceaisdk/react-native-face-sdk@latest
+```
+
+### iOS
+
+在 `ios/Podfile` 加载辅助脚本，并在 React Native 的 post-install 之后调用：
+
+```ruby
+require_relative '../node_modules/@faceaisdk/react-native-face-sdk/scripts/faceaisdk_post_install.rb'
+
+post_install do |installer|
+  react_native_post_install(
+    installer,
+    config[:reactNativePath],
+    :mac_catalyst_enabled => false
+  )
+  faceaisdk_post_install(installer)
+end
+```
+
+在 `Info.plist` 添加相机用途说明，再执行 `pod install`：
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>人脸识别和活体检测需要使用相机。</string>
+```
+
+### Android
+
+使用 `minSdkVersion >= 24` 和 `compileSdkVersion >= 34`，在
+`android/app/src/main/AndroidManifest.xml` 声明相机权限：
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+```
+
+运行时权限申请见 [App.tsx](./App.tsx) 的 `requestCameraPermission`；
+iOS 权限弹窗由 SDK 处理。
 
 ## 常见问题
 
-### 页面显示“SDK 未连接”
+- **SDK 不可用：**确认依赖已安装；iOS 执行 `pod install`，打开 `.xcworkspace`。
+  安装或升级 SDK 后重新构建原生应用。
+- **Debug 页面无法加载：**确认 Metro 在 8765 端口运行，检查手机到电脑的网络、
+  Metro 主机地址和本地网络权限。
+- **特征或图片录入失败：**为演示常量配置真实数据；已有特征被覆盖后，需要重新录入人脸。
 
-- 确认 `dependencies` 中已经安装 SDK。
-- iOS 执行 `pod install` 后，应打开 `.xcworkspace`，不要打开 `.xcodeproj`。
-- 安装或升级 SDK 后需要重新构建原生应用。
+## 相关示例与反馈
 
-### 自定义特征或 Base64 录入失败
+[iOS](https://github.com/FaceAISDK/FaceAISDK_iOS) ·
+[Android](https://github.com/FaceAISDK/FaceAISDK_Android) ·
+[uniApp](https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS) ·
+[Flutter](https://github.com/FaceAISDK/FaceRecognition_Flutter)
 
-`App.tsx` 中的常量是故意保留的假数据，只用于演示自定义参数传递。需要成功执行时，
-请替换为有效的人脸特征或 Base64 图片。
-
-## 其他 SDK 示例
-
-- [iOS SDK](https://github.com/FaceAISDK/FaceAISDK_iOS)
-- [Android SDK](https://github.com/FaceAISDK/FaceAISDK_Android)
-- [uniApp UTS](https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS)
-- [Flutter](https://github.com/FaceAISDK/FaceRecognition_Flutter)
-- [React Native](https://github.com/FaceAISDK/FaceRecognition_ReactNative)
-
-## 支持与反馈
-
-- [GitHub Issues](https://github.com/FaceAISDK/FaceRecognition_ReactNative/issues)
-- Email: FaceAISDK.Service@gmail.com
+[GitHub Issues](https://github.com/FaceAISDK/FaceRecognition_ReactNative/issues) ·
+FaceAISDK.Service@gmail.com
