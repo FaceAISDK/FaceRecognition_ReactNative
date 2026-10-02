@@ -7,7 +7,7 @@ with [`@faceaisdk/react-native-face-sdk`](https://www.npmjs.com/package/@faceais
 
 ## Requirements
 
-- Node.js 22.11+, React Native 0.84.0, CLI 20.2.0, Face SDK 1.7.1 (iOS Core 2026.09.22).
+- Node.js 22.11+, React Native 0.84.0, CLI 20.2.0, Face SDK 1.7.2 (Android 2026.09.29, iOS Core 2026.09.22).
 - A physical device: iOS 15.5+ or Android API 24+. Simulators are not supported.
 - Xcode and CocoaPods for iOS; Android SDK (compile SDK 34) and JDK 17 for Android.
 

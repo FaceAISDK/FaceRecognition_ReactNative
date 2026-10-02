@@ -7,7 +7,7 @@
 
 ## 环境要求
 
-- Node.js 22.11+、React Native 0.84.0、CLI 20.2.0、Face SDK 1.7.1（iOS Core 2026.09.22）。
+- Node.js 22.11+、React Native 0.84.0、CLI 20.2.0、Face SDK 1.7.2（Android 2026.09.29、iOS Core 2026.09.22）。
 - iOS 15.5+ 或 Android API 24+ 真机；不支持模拟器。
 - iOS 需要 Xcode 和 CocoaPods；Android 需要 Android SDK（compile SDK 34）和 JDK 17。
 
