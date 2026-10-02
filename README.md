@@ -8,6 +8,8 @@
 
 React Native offline face enrollment, verification, and liveness detection SDK. Supports iOS and Android. All functions run offline without the need for backend API services.
 
+Version 1.7.2 uses Android SDK `2026.09.29`; iOS Core remains `2026.09.22`.
+
 > ⚠️ **Important**: This SDK involves low-level hardware and native algorithms. **It must be tested on a physical device**; it will not function on an emulator.
 
 ### Installation
@@ -92,6 +94,8 @@ Use `message` directly; there is no need to map or branch on `code` for user-fac
 ## 中文
 
 FaceAISDK 人脸识别、活体检测 React Native 原生插件，支持 iOS 和 Android 双端；所有功能无需后台 API 服务即可离线运行。
+
+1.7.2 将 Android SDK 升级到 `2026.09.29`；iOS Core 保持 `2026.09.22`。
 
 > ⚠️ **重要提示**：本 SDK 涉及底层硬件与原生算法，**必须使用真机测试**，模拟器无法运行。
 
