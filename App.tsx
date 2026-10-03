@@ -48,6 +48,8 @@ const labels = {
     failed: 'failed',
     unknownError: 'Unknown error',
     dataRequired: 'Set valid demo data in App.tsx before using this API.',
+    enrollmentRequired:
+      'First tap "Enroll face with camera" and confirm saving the face, then try verification again. Standalone liveness detection does not require enrollment.',
     enroll: 'Enroll face with camera',
     verify: 'Face verification + liveness',
     liveness: 'Liveness detection',
@@ -66,6 +68,8 @@ const labels = {
     failed: '失败',
     unknownError: '未知错误',
     dataRequired: '请先在 App.tsx 中配置真实演示数据。',
+    enrollmentRequired:
+      '请先点击“相机录入人脸”并确认保存，再进行人脸比对。独立“活体检测”无需录入人脸。',
     enroll: '相机录入人脸',
     verify: '人脸比对 + 活体检测',
     liveness: '活体检测',
@@ -83,6 +87,7 @@ type LabelKey = keyof (typeof labels)['en'];
 type DemoAction = {
   labelKey: LabelKey;
   needsCamera?: boolean;
+  needsEnrolledFace?: boolean;
   input?: string;
   run: () => Promise<FaceResult>;
 };
@@ -116,6 +121,7 @@ const actions: DemoAction[] = [
   {
     labelKey: 'verify',
     needsCamera: true,
+    needsEnrolledFace: true,
     run: () => faceVerify(DEMO_FACE_ID, LIVENESS_OPTIONS),
   },
   {
@@ -181,6 +187,14 @@ function App() {
       if (action.input !== undefined && !action.input.trim()) {
         Alert.alert(title, t('dataRequired'));
         return;
+      }
+
+      if (action.needsEnrolledFace) {
+        const enrolledFace = await getFaceFeature(DEMO_FACE_ID);
+        if (enrolledFace.code !== 1) {
+          Alert.alert(title, t('enrollmentRequired'));
+          return;
+        }
       }
 
       if (action.needsCamera && !(await requestCameraPermission())) {

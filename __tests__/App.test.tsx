@@ -4,6 +4,7 @@ import {Alert} from 'react-native';
 import {afterEach, beforeEach, expect, it, jest} from '@jest/globals';
 import {
   addFaceByImage,
+  faceVerify,
   getFaceFeature,
   insertFaceFeature,
   isFaceAIModuleAvailable,
@@ -86,6 +87,60 @@ it('still queries the enrolled face', async () => {
   expect(alert).toHaveBeenCalledWith(
     expect.any(String),
     expect.stringContaining('code: 1'),
+  );
+});
+
+it('requires enrollment before face verification', async () => {
+  jest.mocked(getFaceFeature).mockResolvedValue({
+    code: 0,
+    message: 'Feature length=0',
+    faceID: 'demo-user',
+    similarity: 0,
+    liveness: 0,
+    faceFeature: '',
+    faceBase64: '',
+  });
+  const alert = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
+  const tree = await renderDemo();
+  await act(async () => {
+    await menuButtons(tree)[1].props.onPress();
+  });
+
+  expect(getFaceFeature).toHaveBeenCalledWith('demo-user');
+  expect(faceVerify).not.toHaveBeenCalled();
+  expect(alert).toHaveBeenCalledWith(
+    expect.any(String),
+    expect.stringMatching(
+      /请先点击“相机录入人脸”|First tap "Enroll face with camera"/,
+    ),
+  );
+});
+
+it('verifies a face after enrollment', async () => {
+  const result = {
+    code: 1,
+    message: 'Success',
+    faceID: 'demo-user',
+    similarity: 0.9,
+    liveness: 0.99,
+    faceFeature: 'feature',
+    faceBase64: '',
+  };
+  jest.mocked(getFaceFeature).mockResolvedValue(result);
+  jest.mocked(faceVerify).mockResolvedValue(result);
+  const alert = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
+  const tree = await renderDemo();
+  await act(async () => {
+    await menuButtons(tree)[1].props.onPress();
+  });
+
+  expect(faceVerify).toHaveBeenCalledWith(
+    'demo-user',
+    expect.objectContaining({livenessType: 1, timeout: 7, steps: 2}),
+  );
+  expect(alert).toHaveBeenCalledWith(
+    expect.any(String),
+    expect.stringContaining('similarity: 0.9'),
   );
 });
 

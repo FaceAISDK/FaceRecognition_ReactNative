@@ -1,6 +1,6 @@
 {
   "name": "faceaisdk-react-native-demo",
-  "version": "1.7.2",
+  "version": "1.7.4",
   "private": true,
   "scripts": {
     "android": "react-native run-android --port 8765 --extra-params=\"--init-script gradle/dependency-mirrors.init.gradle\"",
@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@faceaisdk/react-native-face-sdk": "^1.7.2",
+    "@faceaisdk/react-native-face-sdk": "^1.7.4",
     "react": "19.2.3",
     "react-native": "0.84.0"
   },

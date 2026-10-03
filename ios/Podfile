@@ -1,7 +1,5 @@
 require Pod::Executable.execute_command('node', ['-p', 'require.resolve("react-native/scripts/react_native_pods.rb", {paths: [process.argv[1]]})', __dir__]).strip
 
-require_relative '../node_modules/@faceaisdk/react-native-face-sdk/scripts/faceaisdk_post_install.rb'
-
 platform :ios, '15.5'
 prepare_react_native_project!
 
@@ -15,6 +13,21 @@ target 'FaceAISDK_RN' do
 
   post_install do |installer|
     react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
-    faceaisdk_post_install(installer)
+
+    # FaceAISDK_Core was built against a resilient TensorFlowLite Swift module.
+    # Keep the same ABI when compiling its dependency from source. This scoped
+    # workaround is required by plugin 1.7.4 until its automatic hook is fixed.
+    flag = '-no-verify-emitted-module-interface'
+    installer.pods_project.targets.each do |target|
+      next unless target.name == 'TensorFlowLiteSwift'
+
+      target.build_configurations.each do |configuration|
+        configuration.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+        flags = Array(configuration.build_settings['OTHER_SWIFT_FLAGS'] || '$(inherited)').join(' ')
+        next if flags.split.include?(flag)
+
+        configuration.build_settings['OTHER_SWIFT_FLAGS'] = "#{flags} #{flag}"
+      end
+    end
   end
 end
