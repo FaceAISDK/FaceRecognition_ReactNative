@@ -29,8 +29,9 @@ Pod::Spec.new do |s|
   # 本插件自身（消费 FaceAISDK_Core 的 target）在更高版本工具链上编译时，需要重新
   # 编译 FaceAISDK_Core 的 .swiftinterface，而该过程必须能发现 TensorFlowLite 的
   # Clang modulemap。这里把 Pods/Headers/Public 暴露给本 target 的 Swift include
-  # 搜索路径。上面注册的自动回调仅补齐 TensorFlowLite 的 modulemap，
-  # 宿主工程无需额外 require 或修改 post_install。
+  # 搜索路径。上面注册的自动回调补齐 TensorFlowLite 的 modulemap，并为
+  # TensorFlowLiteSwift 保持 Core 所需的 library evolution ABI。
+  # 宿主工程无需额外 require 或调用 SDK post_install；App 的发行模式应为 NO。
   s.pod_target_xcconfig = {
     'SWIFT_INCLUDE_PATHS' => '$(inherited) "${PODS_ROOT}/Headers/Public"',
     'OTHER_SWIFT_FLAGS'   => '$(inherited) -no-verify-emitted-module-interface'

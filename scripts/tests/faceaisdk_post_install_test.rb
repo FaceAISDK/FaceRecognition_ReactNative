@@ -41,7 +41,7 @@ class FaceAISDKPostInstallTest < Minitest::Test
     assert_equal 1, Pod::Podfile.ancestors.count(Integration::PostInstall)
   end
 
-  def test_host_callback_runs_before_modulemap_fix_and_settings_are_preserved
+  def test_host_callback_runs_before_sdk_configuration_and_settings_are_preserved
     tfl = @tfl
     called = false
     podfile = Pod::Podfile.new do
@@ -57,11 +57,13 @@ class FaceAISDKPostInstallTest < Minitest::Test
     assert podfile.post_install!(@installer)
     assert called
     @tfl.build_configurations.each do |config|
-      assert_equal ['$(inherited)', '-DHOST_FLAG'], config.build_settings['OTHER_SWIFT_FLAGS']
+      assert_equal ['$(inherited)', '-DHOST_FLAG', '-no-verify-emitted-module-interface'],
+                   config.build_settings['OTHER_SWIFT_FLAGS']
       assert_equal ['$(inherited)', 'custom/path'], config.build_settings['SWIFT_INCLUDE_PATHS']
-      assert_nil config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
+      assert_equal 'YES', config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
     end
     @react.build_configurations.each do |config|
+      assert_nil config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
       assert_nil config.build_settings['OTHER_SWIFT_FLAGS']
       assert_nil config.build_settings['SWIFT_INCLUDE_PATHS']
     end
@@ -82,7 +84,11 @@ class FaceAISDKPostInstallTest < Minitest::Test
     2.times { podfile.post_install!(@installer) }
     assert_equal 'TensorFlowLiteSwift.modulemap', File.readlink(File.join(@tfl_headers, 'module.modulemap'))
     assert_nil @tfl.build_configurations.first.build_settings['SWIFT_INCLUDE_PATHS']
-    assert_nil @tfl.build_configurations.first.build_settings['OTHER_SWIFT_FLAGS']
+    @tfl.build_configurations.each do |config|
+      assert_equal 'YES', config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
+      assert_equal '$(inherited) -no-verify-emitted-module-interface',
+                   config.build_settings['OTHER_SWIFT_FLAGS']
+    end
     assert_equal '$(inherited) "custom/path"', @xcconfig.attributes['SWIFT_INCLUDE_PATHS']
   end
 
@@ -100,8 +106,10 @@ class FaceAISDKPostInstallTest < Minitest::Test
     target = subproject.new_target(:static_library, 'TensorFlowLiteSwift-variant', :ios, '15.5')
     @installer.pod_target_subprojects = [subproject]
     Pod::Podfile.new.post_install!(@installer)
-    assert_nil target.build_configurations.first.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
-    assert_nil target.build_configurations.first.build_settings['SWIFT_INCLUDE_PATHS']
+    settings = target.build_configurations.first.build_settings
+    assert_equal 'YES', settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
+    assert_equal '$(inherited) -no-verify-emitted-module-interface', settings['OTHER_SWIFT_FLAGS']
+    assert_nil settings['SWIFT_INCLUDE_PATHS']
     assert File.exist?(File.join(@tfl_headers, 'module.modulemap'))
   end
 
@@ -193,9 +201,16 @@ class FaceAISDKPostInstallTest < Minitest::Test
     tfl = saved.targets.find { |target| target.name == 'TensorFlowLiteSwift' }
     refute_nil tfl
     tfl.build_configurations.each do |build_config|
-      assert_nil build_config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
-      assert_equal '$(inherited) -DHOST_FLAG', build_config.build_settings['OTHER_SWIFT_FLAGS']
+      assert_equal 'YES', build_config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
+      assert_equal '$(inherited) -DHOST_FLAG -no-verify-emitted-module-interface',
+                   build_config.build_settings['OTHER_SWIFT_FLAGS']
       assert_nil build_config.build_settings['SWIFT_INCLUDE_PATHS']
+    end
+    saved.targets.reject { |target| target == tfl }.each do |target|
+      target.build_configurations.each do |build_config|
+        assert_equal '$(inherited) -DHOST_FLAG', build_config.build_settings['OTHER_SWIFT_FLAGS']
+        assert_nil build_config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION']
+      end
     end
     assert File.exist?(File.join(sandbox.root, 'Headers', 'Public', 'TensorFlowLite', 'module.modulemap'))
     sdk_config = File.join(sandbox.root, 'Target Support Files', 'react-native-face-sdk', 'react-native-face-sdk.debug.xcconfig')
