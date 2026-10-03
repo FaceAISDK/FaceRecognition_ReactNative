@@ -5,9 +5,6 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-# SDK特殊处理 FaceAISDK faceaisdk_post_install.rb
-require_relative '../../scripts/faceaisdk_post_install.rb'
-
 platform :ios, '15.5'
 prepare_react_native_project!
 
@@ -37,10 +34,8 @@ target 'FaceRN' do
       :mac_catalyst_enabled => false
     )
 
-    # 2. 调用 FaceAISDK 的后置处理（解决 TensorFlowLite 模块化等问题）
-    faceaisdk_post_install(installer)
-
-    # 3. 统一所有 Target 的部署版本
+    # FaceAISDK 的兼容处理由 autolinking 加载的 podspec 自动执行。
+    # 2. 统一所有 Target 的部署版本
     installer.pods_project.build_configurations.each do |config|
       config.build_settings["CLANG_ENABLE_MODULES"] = "YES"
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.5'

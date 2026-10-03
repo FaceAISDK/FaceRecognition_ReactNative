@@ -1449,78 +1449,9 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-face-sdk (1.7.1):
+  - react-native-face-sdk (1.7.4):
     - FaceAISDK_Core (= 2026.09.22)
     - React-Core
-  - react-native-safe-area-context (5.10.0):
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - react-native-safe-area-context/common (= 5.10.0)
-    - react-native-safe-area-context/fabric (= 5.10.0)
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
-  - react-native-safe-area-context/common (5.10.0):
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
-  - react-native-safe-area-context/fabric (5.10.0):
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - react-native-safe-area-context/common
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
   - React-NativeModulesApple (0.84.0):
     - hermes-engine
     - React-callinvoker
@@ -1959,7 +1890,6 @@ DEPENDENCIES:
   - React-Mapbuffer (from `../../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - "react-native-face-sdk (from `../node_modules/@faceaisdk/react-native-face-sdk`)"
-  - react-native-safe-area-context (from `../../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-networking (from `../../node_modules/react-native/ReactCommon/react/networking`)
   - React-oscompat (from `../../node_modules/react-native/ReactCommon/oscompat`)
@@ -2095,8 +2025,6 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
   react-native-face-sdk:
     :path: "../node_modules/@faceaisdk/react-native-face-sdk"
-  react-native-safe-area-context:
-    :path: "../../node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
     :path: "../../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-networking:
@@ -2224,8 +2152,7 @@ SPEC CHECKSUMS:
   React-logger: 9e51e01455f15cb3ef87a09a1ec773cdb22d56c1
   React-Mapbuffer: 92b99e450e8ff598b27d6e4db3a75e04fd45e9a9
   React-microtasksnativemodule: 2fe0f2bd2840dedbd66c0ac249c64f977f39cc18
-  react-native-face-sdk: 83b87145dff3efe3b657994be2ed6d9d6ebc5db7
-  react-native-safe-area-context: b253968ae0fa552eac026bc01fe69a1a672358d3
+  react-native-face-sdk: 6667de49386a36553f7c587441606d295c564204
   React-NativeModulesApple: 44a9474594566cd03659f92e38f42599c6b9dee4
   React-networking: db73d91466cb134fcbdaaa579fb2de14e2c2ea01
   React-oscompat: b924b8609d06899f00ab1aa813b0cde9c5e12771
@@ -2264,6 +2191,6 @@ SPEC CHECKSUMS:
   TensorFlowLiteSwift: 723fe42222815e72490c79feeff05305530de393
   Yoga: 772166513f9cd2d61a6251d0dacbbfaa5b537479
 
-PODFILE CHECKSUM: fa853b9192585582bdb7c1882b6b2326976941c4
+PODFILE CHECKSUM: 905ee0e1b5dddbae18876e5bc04f7cd2186cf0cd
 
 COCOAPODS: 1.16.2

@@ -38,6 +38,10 @@ cd example
 - Ruby 4 环境下 `kconv` 缺失的兼容层
 - `bundle exec pod install --project-directory=ios`
 
+FaceAISDK 的 Swift / TensorFlowLite 兼容设置由 SDK podspec 自动处理，示例 Podfile 无需额外引入 `faceaisdk_post_install.rb` 或添加 SDK 的 `post_install` 调用。
+
+在 iOS 开发环境中，可从仓库根目录运行 `npm run test:ios`，验证自动回调、旧配置兼容及 CocoaPods 本地工程生成。该测试复用示例的 Ruby gems，依赖 Pod 使用本地测试替身，无需下载 SDK。
+
 ## 自动运行脚本
 
 ```sh
@@ -70,4 +74,3 @@ npm run release:verify
 ```
 
 该命令只会 `npm pack` 并校验压缩包内是否包含发布必需文件，**不会改动 `example/` 的本地联调环境**。
-

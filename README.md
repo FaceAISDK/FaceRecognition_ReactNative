@@ -8,7 +8,7 @@
 
 React Native offline face enrollment, verification, and liveness detection SDK. Supports iOS and Android. All functions run offline without the need for backend API services.
 
-Version 1.7.2 uses Android SDK `2026.09.29`; iOS Core remains `2026.09.22`.
+Version 1.7.4 restores the original iOS localization calls and retains the automatic TensorFlowLite modulemap setup, without a manual SDK post-install call. Android SDK remains `2026.09.29`; iOS Core remains `2026.09.22`.
 
 > ⚠️ **Important**: This SDK involves low-level hardware and native algorithms. **It must be tested on a physical device**; it will not function on an emulator.
 
@@ -19,24 +19,19 @@ npm install @faceaisdk/react-native-face-sdk
 ```
 
 #### iOS Configuration
-1. Update your `ios/Podfile` to include the SDK post-install hook:
-   ```ruby
-   require_relative '../node_modules/@faceaisdk/react-native-face-sdk/scripts/faceaisdk_post_install.rb'
-
-   post_install do |installer|
-     react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
-     faceaisdk_post_install(installer)
-   end
-   ```
-2. cd ios and run pod install (TensorFlowLiteSwift may take a while depending on the network)
+1. Set the app's iOS deployment target and the `platform :ios` in `ios/Podfile` to **15.5** or later.
+2. Install the Pod dependencies (TensorFlowLiteSwift may take a while depending on the network):
    ```bash
    cd ios && pod install
    ```
+   React Native autolinking loads the SDK's podspec, which automatically supplies the TensorFlowLite modulemap needed for static library integration. No SDK-specific `require_relative` or `post_install` call is needed. Keep your existing `react_native_post_install` callback.
 3. Add the camera permission to your `Info.plist`:
    ```xml
    <key>NSCameraUsageDescription</key>
    <string>We need access to your camera for face recognition and liveness detection.</string>
    ```
+
+When upgrading from the manual setup, remove the `require_relative '.../faceaisdk_post_install.rb'` line and the `faceaisdk_post_install(installer)` call from your Podfile, then run `pod install` again. Existing manual calls remain compatible.
 
 #### Android Configuration
 1. Ensure your project's `minSdkVersion` is at least **24**.
@@ -95,7 +90,7 @@ Use `message` directly; there is no need to map or branch on `code` for user-fac
 
 FaceAISDK 人脸识别、活体检测 React Native 原生插件，支持 iOS 和 Android 双端；所有功能无需后台 API 服务即可离线运行。
 
-1.7.2 将 Android SDK 升级到 `2026.09.29`；iOS Core 保持 `2026.09.22`。
+1.7.4 恢复原有 iOS 本地化调用，保留 TensorFlowLite modulemap 自动配置，无需手动调用 SDK 的 post-install 脚本。Android SDK 保持 `2026.09.29`；iOS Core 保持 `2026.09.22`。
 
 > ⚠️ **重要提示**：本 SDK 涉及底层硬件与原生算法，**必须使用真机测试**，模拟器无法运行。
 
@@ -106,24 +101,19 @@ npm install @faceaisdk/react-native-face-sdk
 ```
 
 #### iOS 配置
-1. 在您的 `ios/Podfile` 中接入必要的脚本：
-   ```ruby
-   require_relative '../node_modules/@faceaisdk/react-native-face-sdk/scripts/faceaisdk_post_install.rb'
-
-   post_install do |installer|
-     react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
-     faceaisdk_post_install(installer)
-   end
-   ```
-2. 进入 `ios` 目录并安装 Pod 依赖(TensorFlowLiteSwift根据网络状态会需要比较长时间)
+1. 将 App 的 iOS 部署版本及 `ios/Podfile` 中的 `platform :ios` 设为 **15.5** 或更高。
+2. 进入 `ios` 目录并安装 Pod 依赖（TensorFlowLiteSwift 根据网络状态可能耗时较长）：
    ```bash
    cd ios && pod install
    ```
+   React Native autolinking 会加载 SDK 的 podspec，自动补齐静态库集成所需的 TensorFlowLite modulemap，无需手动引入脚本或调用 `faceaisdk_post_install`。保留项目原有的 `react_native_post_install` 即可。
 3. 在 `Info.plist` 中添加相机权限描述：
    ```xml
    <key>NSCameraUsageDescription</key>
    <string>我们需要访问您的相机进行人脸识别与活体检测</string>
    ```
+
+从旧版手动配置升级时，可删除 Podfile 中的 `require_relative '.../faceaisdk_post_install.rb'` 和 `faceaisdk_post_install(installer)`，再执行一次 `pod install`。保留旧调用也兼容。
 
 #### Android 配置
 1. 确保项目的 `minSdkVersion` 至少为 **24**。

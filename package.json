@@ -1,6 +1,6 @@
 {
   "name": "@faceaisdk/react-native-face-sdk",
-  "version": "1.7.2",
+  "version": "1.7.4",
   "description": "React Native offline face enrollment, verification, and liveness detection SDK.",
   "license": "FaceAISDK License",
   "author": "FaceAISDK.Service@gmail.com",
@@ -40,6 +40,7 @@
     "prepare": "bash ./scripts/npm-cli.sh run clean && bash ./scripts/npm-cli.sh run build",
     "prepublishOnly": "bash ./scripts/npm-cli.sh run typecheck && bash ./scripts/npm-cli.sh run lint && bash ./scripts/npm-cli.sh test",
     "test": "jest --runInBand",
+    "test:ios": "cd example && bundle exec ruby ../scripts/tests/faceaisdk_post_install_test.rb",
     "lint": "eslint src __tests__",
     "pack": "bash ./scripts/npm-cli.sh pack .",
     "package:build": "npm run build",

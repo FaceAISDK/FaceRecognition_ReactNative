@@ -1,4 +1,7 @@
 require 'json'
+require_relative 'scripts/faceaisdk_post_install'
+
+FaceAISDK::CocoaPodsIntegration.register!
 
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
@@ -26,8 +29,8 @@ Pod::Spec.new do |s|
   # 本插件自身（消费 FaceAISDK_Core 的 target）在更高版本工具链上编译时，需要重新
   # 编译 FaceAISDK_Core 的 .swiftinterface，而该过程必须能发现 TensorFlowLite 的
   # Clang modulemap。这里把 Pods/Headers/Public 暴露给本 target 的 Swift include
-  # 搜索路径。注意：对 TensorFlowLiteSwift / 聚合 target 的修复无法在 podspec 内完成，
-  # 宿主工程仍需在 Podfile 的 post_install 中调用 scripts/faceaisdk_post_install.rb。
+  # 搜索路径。上面注册的自动回调仅补齐 TensorFlowLite 的 modulemap，
+  # 宿主工程无需额外 require 或修改 post_install。
   s.pod_target_xcconfig = {
     'SWIFT_INCLUDE_PATHS' => '$(inherited) "${PODS_ROOT}/Headers/Public"',
     'OTHER_SWIFT_FLAGS'   => '$(inherited) -no-verify-emitted-module-interface'
