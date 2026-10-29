@@ -4,6 +4,9 @@ platform :ios, '15.5'
 prepare_react_native_project!
 
 target 'FaceAISDK_RN' do
+  # Keep the native SDK aligned with the npm plugin release.
+  pod 'FaceAISDK_Core', :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git', :tag => '2026.10.29'
+
   config = use_native_modules!
 
   use_react_native!(
@@ -14,20 +17,6 @@ target 'FaceAISDK_RN' do
   post_install do |installer|
     react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
 
-    # FaceAISDK_Core was built against a resilient TensorFlowLite Swift module.
-    # Keep the same ABI when compiling its dependency from source. This scoped
-    # workaround is required by plugin 1.7.4 until its automatic hook is fixed.
-    flag = '-no-verify-emitted-module-interface'
-    installer.pods_project.targets.each do |target|
-      next unless target.name == 'TensorFlowLiteSwift'
-
-      target.build_configurations.each do |configuration|
-        configuration.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-        flags = Array(configuration.build_settings['OTHER_SWIFT_FLAGS'] || '$(inherited)').join(' ')
-        next if flags.split.include?(flag)
-
-        configuration.build_settings['OTHER_SWIFT_FLAGS'] = "#{flags} #{flag}"
-      end
-    end
+    # SDK 1.8.0 automatically configures the TensorFlowLite modulemap and ABI.
   end
 end

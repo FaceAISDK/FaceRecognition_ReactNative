@@ -10,7 +10,7 @@ tools are maintained on the [`dev` branch](https://github.com/FaceAISDK/FaceReco
 
 ## Requirements
 
-- Node.js 22.11+, React Native 0.84.0, CLI 20.2.0, Face SDK 1.7.4 (Android 2026.09.29, iOS Core 2026.09.22).
+- Node.js 22.11+, React Native 0.84.0, CLI 20.2.0, Face SDK 1.8.0 (Android 2026.10.29.meiju, iOS Core 2026.10.29).
 - A physical device: iOS 15.5+ or Android API 24+. Simulators are not supported.
 - Xcode and CocoaPods for iOS; Android SDK (compile SDK 34) and JDK 17 for Android.
 
@@ -37,13 +37,12 @@ npm run android
 ### iOS
 
 The demo already configures iOS 15.5+ and explicitly sets **Build Libraries for
-Distribution** to **No** for the App target in Debug and Release. SDK 1.7.4
-automatically supplies the TensorFlowLite modulemap. Version 1.7.4 omits a
-TensorFlowLiteSwift ABI setting required by the prebuilt Core, causing model
-initialization to crash. This demo's [Podfile](./ios/Podfile) includes the scoped
-workaround: enable distribution mode and skip emitted-interface verification
-for TensorFlowLiteSwift in Debug and Release. Keep the App target set to No.
-The `dev` branch contains the automatic ABI fix, pending a new npm release.
+Distribution** to **No** for the App target in Debug and Release. SDK 1.8.0
+automatically supplies the TensorFlowLite modulemap and the TensorFlowLiteSwift
+ABI settings required by the prebuilt Core. The demo's [Podfile](./ios/Podfile)
+pins Core to the `2026.10.29` Git tag and keeps the standard React Native
+post-install callback; no SDK-specific workaround is needed. Keep the App
+target set to No.
 
 Install Pods:
 
@@ -119,7 +118,7 @@ const options = {
   Use a real SDK feature and a valid Base64 image; inserting a feature overwrites
   data for the same face ID.
 - `motionTypes` contains comma-separated motion IDs; `timeout` and `steps` control
-  the timeout and action count. In SDK 1.7.4, `allowMultiFaces` is forwarded to
+  the timeout and action count. In SDK 1.8.0, `allowMultiFaces` is forwarded to
   the Android SDK; the iOS bridge accepts it but does not forward it to Core.
   `faceVerify` also accepts `threshold` (default `0.83`), a similarity threshold,
   not a liveness threshold.
@@ -143,7 +142,7 @@ the promise. The demo displays feature/image lengths instead of large raw values
 
 ## SDK Integration
 
-For another React Native project, use the following platform setup with SDK 1.7.4.
+For another React Native project, use the following platform setup with SDK 1.8.0.
 
 ### iOS
 
@@ -153,7 +152,7 @@ Before installing Pods:
 2. In Xcode, select the **App target → Build Settings → Build Libraries for
    Distribution** (`BUILD_LIBRARY_FOR_DISTRIBUTION`) and explicitly set **No**
    for both Debug and Release. This demo already includes that setting. Core
-   2026.09.22 exports `YES` into the host xcconfig; inheriting it can make CocoaPods
+   2026.10.29 exports `YES` into the host xcconfig; inheriting it can make CocoaPods
    enable distribution mode for unrelated Pods and fail Swift interface verification.
    [Library evolution](https://www.swift.org/blog/library-evolution/) is intended
    for frameworks distributed separately from their clients.
@@ -164,50 +163,33 @@ Before installing Pods:
    <string>Camera access is required for face recognition and liveness detection.</string>
    ```
 
-With npm version 1.7.4, add the following after `react_native_post_install` in
-your existing `post_install` callback:
-
-```ruby
-flag = '-no-verify-emitted-module-interface'
-installer.pods_project.targets.each do |target|
-  next unless target.name == 'TensorFlowLiteSwift'
-
-  target.build_configurations.each do |configuration|
-    configuration.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-    flags = Array(configuration.build_settings['OTHER_SWIFT_FLAGS'] || '$(inherited)').join(' ')
-    next if flags.split.include?(flag)
-
-    configuration.build_settings['OTHER_SWIFT_FLAGS'] = "#{flags} #{flag}"
-  end
-end
-```
-
-Core was built against TensorFlowLiteSwift's library evolution ABI. Compiling
-that dependency without library evolution changes how `Interpreter.Options` is
-passed and causes `EXC_BREAKPOINT` / `SIGTRAP` in `Interpreter.init`. This
-workaround affects TensorFlowLiteSwift only; keep the App target set to No.
+SDK 1.8.0 automatically enables library evolution and skips emitted-interface
+verification for TensorFlowLiteSwift, matching the ABI used by the prebuilt
+Core. Keep your existing `react_native_post_install` callback and the App
+target's distribution setting at No.
 
 From the project root, install the plugin and Pods:
 
 ```bash
-npm install @faceaisdk/react-native-face-sdk@1.7.4
+npm install @faceaisdk/react-native-face-sdk@1.8.0
 cd ios && pod install
 ```
 
 React Native autolinking loads the SDK podspec, which registers the modulemap
-repair automatically. No SDK-specific `require_relative` or
+and ABI configuration automatically. No SDK-specific `require_relative` or
 `faceaisdk_post_install(installer)` call is needed; keep your existing
-`react_native_post_install` callback and the scoped 1.7.4 workaround above.
-When upgrading from the old setup, remove
-the SDK's `require_relative '.../faceaisdk_post_install.rb'` line and the
-`faceaisdk_post_install(installer)` call, then run `pod install` again and rebuild.
+`react_native_post_install` callback. When upgrading, remove the temporary
+TensorFlowLiteSwift workaround for 1.7.4, the SDK's
+`require_relative '.../faceaisdk_post_install.rb'` line, and the
+`faceaisdk_post_install(installer)` call if present, then run `pod install`
+again and rebuild.
 
 ### Android
 
 Install the plugin from the project root:
 
 ```bash
-npm install @faceaisdk/react-native-face-sdk@1.7.4
+npm install @faceaisdk/react-native-face-sdk@1.8.0
 ```
 
 Use `minSdkVersion >= 24` and `compileSdkVersion >= 34`. Add camera permission
@@ -222,20 +204,20 @@ The SDK handles the iOS permission prompt.
 
 ## Troubleshooting
 
-- **A camera operation crashes in `TensorFlowLite.Interpreter.init`:** npm 1.7.4
-  requires the TensorFlowLiteSwift workaround above. Run `pod install` and rebuild
-  after applying it. Changing the App's distribution setting alone does not fix
-  this runtime ABI mismatch.
+- **A camera operation crashes in `TensorFlowLite.Interpreter.init`:** confirm
+  npm SDK 1.8.0 is installed, then run `pod install` and rebuild so its automatic
+  TensorFlowLiteSwift ABI configuration is applied. Keep the App target's
+  distribution setting at No.
 - **SDK unavailable:** confirm the dependency is installed, run `pod install` on
   iOS, and rebuild the native app. Open `.xcworkspace`, not `.xcodeproj`.
 - **TensorFlowLite Swift interface verification fails:** if the build reports
   `underlying Objective-C module 'TensorFlowLite' not found` during
   `SwiftVerifyEmittedModuleInterface`, explicitly set the App target's
-  `BUILD_LIBRARY_FOR_DISTRIBUTION` to `NO` in Debug and Release, and apply the
-  TensorFlowLiteSwift workaround above, then run `pod install` again. That
-  target needs distribution mode enabled with emitted-interface verification
-  skipped. Changing settings only on the build command line does not update
-  the Pods configurations generated by CocoaPods.
+  `BUILD_LIBRARY_FOR_DISTRIBUTION` to `NO` in Debug and Release, then run
+  `pod install` again with npm SDK 1.8.0 installed. The SDK automatically enables
+  distribution mode and skips emitted-interface verification for TensorFlowLiteSwift.
+  Changing settings only on the build command line does not update the Pods
+  configurations generated by CocoaPods.
 - **Debug bundle not loading:** confirm Metro is running on port 8765; check the
   phone's access to the computer, the Metro host address, and local network permission.
 - **Feature/image import fails:** configure the demo constants with real data.
