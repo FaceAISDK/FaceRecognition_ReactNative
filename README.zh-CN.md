@@ -5,8 +5,7 @@
 使用 [`@faceaisdk/react-native-face-sdk`](https://www.npmjs.com/package/@faceaisdk/react-native-face-sdk)
 演示真机上的离线人脸录入、比对、活体检测和特征管理。
 
-`main` 是 npm 插件消费示例；插件源码和完整 API 文档位于
-[`dev`](https://github.com/FaceAISDK/FaceRecognition_ReactNative/tree/dev)。
+`main` 是使用已发布 SDK **1.8.0** 的演示工程。
 
 ## 环境要求
 
@@ -80,7 +79,8 @@ iOS 16 及更早版本使用 `npm run ios:legacy`，安装 Release 后点击手�
 faceID 的已有数据。检查返回的 `code` 和 `message` 判断业务结果，业务失败不一定抛异常。
 示例仅展示特征和图片字符串的长度。
 
-接入自己的项目请查看[插件接入文档](https://github.com/FaceAISDK/FaceRecognition_ReactNative/tree/dev)。
+接入自己的项目请查看 [SDK 1.8.0 接入文档](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/v1.8.0/README.md#中文)。
+参数与返回类型见 [1.8.0 TypeScript 定义](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/v1.8.0/src/types.ts)。
 iOS 需配置相机用途说明，并将 App target 的 Debug、Release 中
 `BUILD_LIBRARY_FOR_DISTRIBUTION` 设为 `NO`；SDK 1.8.0 自动配置 TensorFlowLite。
 Android 需声明相机权限并在运行时申请。
