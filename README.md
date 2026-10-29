@@ -8,13 +8,11 @@
 
 React Native offline face enrollment, verification, and liveness detection SDK. Supports iOS and Android. All functions run offline without the need for backend API services.
 
-Version 1.7.4 restores the original iOS localization calls and retains the automatic TensorFlowLite modulemap setup, without a manual SDK post-install call. Android SDK remains `2026.09.29`; iOS Core remains `2026.09.22`.
-
-**Unreleased iOS runtime fix on `dev`:** the automatic hook now preserves the
+Version 1.8.0 updates the Android SDK to `2026.10.29.meiju` and iOS Core to
+`2026.10.29`. Android exposes the native SDK dependency through `api`. On iOS,
+the automatic hook supplies the TensorFlowLite modulemap and preserves the
 TensorFlowLiteSwift ABI required by Core, including variant targets and separate
-Pod projects. Published npm 1.7.4 does not contain this fix. Until a package with
-the fix is released, use the scoped workaround in the
-[main demo's Podfile](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/main/ios/Podfile).
+Pod projects. No manual SDK post-install call is needed.
 
 > ⚠️ **Important**: This SDK involves low-level hardware and native algorithms. **It must be tested on a physical device**; it will not function on an emulator.
 
@@ -28,27 +26,27 @@ npm install @faceaisdk/react-native-face-sdk
 
 1. Set the app's iOS deployment target and the `platform :ios` in `ios/Podfile` to **15.5** or later.
 2. Explicitly set **App target → Build Settings → Build Libraries for Distribution**
-   (`BUILD_LIBRARY_FOR_DISTRIBUTION`) to **No** in Debug and Release. Core 2026.09.22
+   (`BUILD_LIBRARY_FOR_DISTRIBUTION`) to **No** in Debug and Release. Core 2026.10.29
    exports `YES` to the host xcconfig; overriding it on the App prevents CocoaPods
    from enabling distribution mode for unrelated Swift Pods.
-3. If using published npm 1.7.4, add the TensorFlowLiteSwift workaround from the
-   [main demo's Podfile](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/main/ios/Podfile)
-   after `react_native_post_install` in your existing callback.
-4. Install the Pod dependencies (TensorFlowLiteSwift may take a while depending on the network):
+3. Install the Pod dependencies (TensorFlowLiteSwift may take a while depending on the network):
    ```bash
    cd ios && pod install
    ```
    React Native autolinking loads the SDK's podspec, which automatically supplies
-   the TensorFlowLite modulemap needed for static library integration. Keep your
-   existing `react_native_post_install` callback and the npm 1.7.4 workaround.
+   the TensorFlowLite modulemap and ABI settings needed for static library integration.
+   Keep your existing `react_native_post_install` callback.
    No SDK-specific `require_relative` or `faceaisdk_post_install` call is needed.
-5. Add the camera permission to your `Info.plist`:
+4. Add the camera permission to your `Info.plist`:
    ```xml
    <key>NSCameraUsageDescription</key>
    <string>We need access to your camera for face recognition and liveness detection.</string>
    ```
 
 When upgrading from the manual setup, remove the `require_relative '.../faceaisdk_post_install.rb'` line and the `faceaisdk_post_install(installer)` call from your Podfile, then run `pod install` again. Existing manual calls remain compatible.
+
+When upgrading from 1.7.4, the temporary TensorFlowLiteSwift workaround copied
+from the demo's Podfile can also be removed; 1.8.0 applies those settings automatically.
 
 Core was compiled against TensorFlowLiteSwift's library evolution ABI. Disabling
 it changes how `Interpreter.Options` is passed and causes `EXC_BREAKPOINT` / `SIGTRAP`
@@ -119,13 +117,10 @@ the face before calling `faceVerify`; standalone `livenessVerify` needs no enrol
 
 FaceAISDK 人脸识别、活体检测 React Native 原生插件，支持 iOS 和 Android 双端；所有功能无需后台 API 服务即可离线运行。
 
-1.7.4 恢复原有 iOS 本地化调用，保留 TensorFlowLite modulemap 自动配置，无需手动调用 SDK 的 post-install 脚本。Android SDK 保持 `2026.09.29`；iOS Core 保持 `2026.09.22`。
-
-**dev 中尚未发布的 iOS 运行修复：**自动回调已为 TensorFlowLiteSwift 保持 Core
-所需的 ABI，覆盖变体 target 和独立 Pod project。已发布的 npm 1.7.4 不包含此修复；
-在包含修复的新版发布前，请使用
-[main 示例 Podfile](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/main/ios/Podfile)
-中的临时配置。
+1.8.0 将 Android SDK 升级为 `2026.10.29.meiju`，iOS Core 升级为 `2026.10.29`。
+Android 通过 `api` 导出原生 SDK 依赖；iOS 自动回调会补齐 TensorFlowLite modulemap，
+并为 TensorFlowLiteSwift 保持 Core 所需的 ABI，覆盖变体 target 和独立 Pod project。
+无需手动调用 SDK 的 post-install 脚本。
 
 > ⚠️ **重要提示**：本 SDK 涉及底层硬件与原生算法，**必须使用真机测试**，模拟器无法运行。
 
@@ -140,25 +135,25 @@ npm install @faceaisdk/react-native-face-sdk
 1. 将 App 的 iOS 部署版本及 `ios/Podfile` 中的 `platform :ios` 设为 **15.5** 或更高。
 2. 在 **App target → Build Settings → Build Libraries for Distribution**
    （`BUILD_LIBRARY_FOR_DISTRIBUTION`）中将 Debug、Release 显式设为 **No**。
-   Core 2026.09.22 会向宿主 xcconfig 导出 `YES`；App 显式覆盖后，可避免 CocoaPods
+   Core 2026.10.29 会向宿主 xcconfig 导出 `YES`；App 显式覆盖后，可避免 CocoaPods
    为其他 Swift Pods 开启发行模式。
-3. 使用已发布的 npm 1.7.4 时，将
-   [main 示例 Podfile](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/main/ios/Podfile)
-   的 TensorFlowLiteSwift 临时配置放在现有回调的 `react_native_post_install` 后。
-4. 进入 `ios` 目录并安装 Pod 依赖（TensorFlowLiteSwift 根据网络状态可能耗时较长）：
+3. 进入 `ios` 目录并安装 Pod 依赖（TensorFlowLiteSwift 根据网络状态可能耗时较长）：
    ```bash
    cd ios && pod install
    ```
    React Native autolinking 会加载 SDK 的 podspec，自动补齐静态库集成所需的
-   TensorFlowLite modulemap。保留项目原有的 `react_native_post_install` 和 npm 1.7.4
-   临时配置，无需手动引入脚本或调用 `faceaisdk_post_install`。
-5. 在 `Info.plist` 中添加相机权限描述：
+   TensorFlowLite modulemap 和 ABI 配置。保留项目原有的 `react_native_post_install`，
+   无需手动引入脚本或调用 `faceaisdk_post_install`。
+4. 在 `Info.plist` 中添加相机权限描述：
    ```xml
    <key>NSCameraUsageDescription</key>
    <string>我们需要访问您的相机进行人脸识别与活体检测</string>
    ```
 
 从旧版手动配置升级时，可删除 Podfile 中的 `require_relative '.../faceaisdk_post_install.rb'` 和 `faceaisdk_post_install(installer)`，再执行一次 `pod install`。保留旧调用也兼容。
+
+从 1.7.4 升级时，也可移除此前从示例 Podfile 复制的 TensorFlowLiteSwift 临时配置；
+1.8.0 已自动执行这些设置。
 
 Core 预编译时使用了 TensorFlowLiteSwift 的 library evolution ABI；关闭它会使
 `Interpreter.Options` 传参方式不匹配，在 `Interpreter.init` 触发

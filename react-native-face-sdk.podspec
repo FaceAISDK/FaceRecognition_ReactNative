@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.summary      = package['description']
   s.license      = package['license']
   s.homepage     = 'https://github.com/FaceAISDK/FaceRecognition_ReactNative'
-  s.authors      = { 'FaceAISDK' => 'support@faceaisdk.example' }
+  s.authors      = { 'FaceAISDK' => package['author'] }
   s.platforms    = { :ios => '15.5' }
-  s.source       = { :git => 'https://github.com/FaceAISDK/FaceRecognition_ReactNative.git', :tag => s.version.to_s }
+  s.source       = { :git => 'https://github.com/FaceAISDK/FaceRecognition_ReactNative.git', :tag => "v#{s.version}" }
   s.source_files = 'ios/**/*.{h,m,mm,swift}'
   s.exclude_files = [
     'ios/Pods/**/*',
@@ -38,5 +38,5 @@ Pod::Spec.new do |s|
   }
 
   s.dependency 'React-Core'
-  s.dependency 'FaceAISDK_Core', '2026.09.22'
+  s.dependency 'FaceAISDK_Core', '2026.10.29'
 end

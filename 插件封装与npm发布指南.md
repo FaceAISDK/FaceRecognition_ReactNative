@@ -2,6 +2,14 @@
 
 本指南面向插件的开发人员，介绍如何维护、联调测试以及向 npm 组织发布 `@faceaisdk/react-native-face-sdk`。
 
+## 1.8.0 版本信息
+
+- npm 插件版本：`@faceaisdk/react-native-face-sdk@1.8.0`。
+- Android SDK：`api 'io.github.faceaisdk:Android:2026.10.29.meiju'`。
+- iOS SDK：`FaceAISDK_Core 2026.10.29`。
+- iOS 接入：自动补齐 TensorFlowLite modulemap，并为 TensorFlowLiteSwift 保持 library evolution ABI，无需手动调用 SDK 的 post-install 脚本。
+- 源码标签：`v1.8.0`，与插件 podspec 的 `s.source` 一致，需指向包含本次发布改动的 `dev` 提交。
+
 ## 1. 目录结构
 
 ```text
@@ -68,7 +76,7 @@ npm test             # 运行单元测试
 ```
 
 ### 2. 本地打包验证
-使用 `npm pack` 在本地生成 `.tgz` 压缩包（例如 `react-native-face-ai-sdk-0.1.0.tgz`）。该文件用于检查压缩包内是否包含必须的原生目录、打包产物（`lib/`）和配置：
+使用 `npm pack` 在本地生成 `.tgz` 压缩包（本版本为 `faceaisdk-react-native-face-sdk-1.8.0.tgz`）。该文件用于检查压缩包内是否包含必须的原生目录、打包产物（`lib/`）和配置：
 ```sh
 npm pack
 ```
@@ -91,8 +99,11 @@ npm run release:verify
 该命令刻意不把 `.tgz` 安装到 `example/`，避免在 Example 下生成独立依赖树，导致 Metro / React Native 双实例问题。Example 始终保持 `file:..` 本地联调模式。
 
 ### 3. 正式发布
-确保在官网已创建 `faceaisdk` 组织，且 `package.json` 中的版本号已递增，然后执行发布：
+先执行下文的预览发布，确认所有检查通过。将本次发布改动提交到 `dev` 后，创建并推送与 podspec 一致的标签，再发布 npm 包：
 ```sh
+git tag v1.8.0
+git push origin dev
+git push origin v1.8.0
 npm publish --access public
 ```
 *注：由于强制 2FA 安全策略，发布时请根据终端提示或使用 `--otp=xxxxxx` 参数输入手机验证码。*

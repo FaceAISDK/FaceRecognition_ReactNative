@@ -152,7 +152,7 @@ class FaceAISDKPostInstallTest < Minitest::Test
     config.silent = true
     {
       'React-Core' => ['0.84.0', nil],
-      'FaceAISDK_Core' => ['2026.09.22', "s.dependency 'TensorFlowLiteSwift', '2.17.0'"],
+      'FaceAISDK_Core' => ['2026.10.29', "s.dependency 'TensorFlowLiteSwift', '2.17.0'"],
       'TensorFlowLiteSwift' => ['2.17.0', "s.module_name = 'TensorFlowLite'"]
     }.each do |name, (version, extra)|
       path = File.join(@root, name)
