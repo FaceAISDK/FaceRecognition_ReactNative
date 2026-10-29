@@ -6,13 +6,14 @@
     "android": "react-native run-android --port 8765 --extra-params=\"--init-script gradle/dependency-mirrors.init.gradle\"",
     "ios": "react-native run-ios --device --port 8765",
     "ios:legacy": "sh scripts/ios-legacy.sh",
-    "lint": "eslint App.tsx __tests__",
+    "doctor": "node scripts/doctor.cjs",
+    "lint": "eslint App.tsx __tests__ scripts/doctor.cjs",
     "start": "react-native start --port 8765",
     "test": "jest --runInBand",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@faceaisdk/react-native-face-sdk": "^1.8.0",
+    "@faceaisdk/react-native-face-sdk": "1.8.0",
     "react": "19.2.3",
     "react-native": "0.84.0"
   },
@@ -37,6 +38,7 @@
     "react-test-renderer": "19.2.3",
     "typescript": "5.0.4"
   },
+  "packageManager": "npm@11.12.1",
   "engines": {
     "node": ">=22.11"
   }

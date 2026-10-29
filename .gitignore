@@ -95,6 +95,9 @@ ios/FaceAISDK_RN.xcworkspace/xcuserdata/
 **/fastlane/test_output
 
 # Miscellaneous
+/.build/
+*.trace/
+*.dSYM/
 lib/
 example/
 *.tgz
