@@ -62,28 +62,9 @@ with `npm start` and use `npm run ios -- --mode Debug`.
 For iOS 16 and earlier, use `npm run ios:legacy`; it installs Release, then tap
 the app icon to launch. Its build log is `ios/build/ios-legacy.log`.
 
-## Try the APIs
+## Integration & API
 
-See [App.tsx](./App.tsx): enroll with the camera, then query or verify the same
-`demo-user`. Standalone liveness does not require enrollment.
-
-| Demo | API |
-| --- | --- |
-| Camera enrollment | `addFaceBySDKCamera` |
-| Verification + liveness | `faceVerify` |
-| Standalone liveness | `livenessVerify` |
-| Read / insert / delete feature | `getFaceFeature` / `insertFaceFeature` / `deleteFaceFeature` |
-| Base64 image enrollment | `addFaceByImage` |
-
-Set `DEMO_FACE_FEATURE` or `DEMO_BASE64_IMAGE` in `App.tsx` before trying imports.
-Imports overwrite the same face ID. Check result `code` and `message`; business
-failures may resolve normally. Feature and image strings are displayed as lengths.
-
-For your own project, follow the [SDK 1.8.0 integration guide](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/v1.8.0/README.md#english).
-See the [1.8.0 TypeScript definitions](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/v1.8.0/src/types.ts) for options and return types.
-iOS needs camera usage text and App target `BUILD_LIBRARY_FOR_DISTRIBUTION=NO`
-in Debug and Release; SDK 1.8.0 configures TensorFlowLite automatically.
-Android needs camera permission in the manifest and a runtime permission request.
+[SDK integration, parameters, return values, and examples](./docs/API.md) · [Demo source](./App.tsx)
 
 ## Troubleshooting
 

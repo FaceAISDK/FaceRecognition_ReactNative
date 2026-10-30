@@ -62,28 +62,9 @@ npm run ios
 iOS 16 及更早版本使用 `npm run ios:legacy`，安装 Release 后点击手机图标启动。
 构建日志位于 `ios/build/ios-legacy.log`。
 
-## 演示功能
+## 接入与 API
 
-调用代码见 [App.tsx](./App.tsx)。先相机录入并确认保存，再查询或比对同一个
-`demo-user`；独立活体检测无需录入。
-
-| 功能 | API |
-| --- | --- |
-| 相机录入 | `addFaceBySDKCamera` |
-| 人脸比对 + 活体 | `faceVerify` |
-| 独立活体检测 | `livenessVerify` |
-| 查询 / 写入 / 删除特征 | `getFaceFeature` / `insertFaceFeature` / `deleteFaceFeature` |
-| Base64 图片录入 | `addFaceByImage` |
-
-导入前在 `App.tsx` 配置 `DEMO_FACE_FEATURE` 或 `DEMO_BASE64_IMAGE`，写入会覆盖同一
-faceID 的已有数据。检查返回的 `code` 和 `message` 判断业务结果，业务失败不一定抛异常。
-示例仅展示特征和图片字符串的长度。
-
-接入自己的项目请查看 [SDK 1.8.0 接入文档](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/v1.8.0/README.md#中文)。
-参数与返回类型见 [1.8.0 TypeScript 定义](https://github.com/FaceAISDK/FaceRecognition_ReactNative/blob/v1.8.0/src/types.ts)。
-iOS 需配置相机用途说明，并将 App target 的 Debug、Release 中
-`BUILD_LIBRARY_FOR_DISTRIBUTION` 设为 `NO`；SDK 1.8.0 自动配置 TensorFlowLite。
-Android 需声明相机权限并在运行时申请。
+[SDK 接入、接口参数、返回值与调用示例](./docs/API.zh-CN.md) · [Demo 源码](./App.tsx)
 
 ## 常见问题
 
